@@ -1,4 +1,4 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.buildConfig)
 }
 
 kotlin {
@@ -46,6 +47,14 @@ kotlin {
             implementation(libs.kotlin.test)
         }
     }
+}
+
+buildConfig {
+    packageName("org.jihye.acnhhb")
+
+    val localProperties = gradleLocalProperties(rootDir, providers)
+    val apiKey = localProperties.getProperty("NOOKIPEDIA_API_KEY") ?: ""
+    buildConfigField("String", "API_KEY", "\"$apiKey\"")
 }
 
 android {
