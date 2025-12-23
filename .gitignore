@@ -17,6 +17,7 @@ local.properties
 
 .vscode/
 document
+doc/
 
 # Android
 **/*.apk
