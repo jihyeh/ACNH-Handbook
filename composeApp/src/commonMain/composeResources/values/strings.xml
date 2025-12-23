@@ -1,0 +1,12 @@
+<resources>
+    <string name="home_title">도감</string>
+    <string name="home_villagers">주민</string>
+    <string name="home_bugs">곤충</string>
+    <string name="home_fish">물고기</string>
+    <string name="home_sea_creatures">해산물</string>
+    <string name="home_art">미술품</string>
+    <string name="home_fossils">화석</string>
+    <string name="home_items">아이템</string>
+    <string name="home_events">이벤트</string>
+    <string name="home_flower_breed">꽃 교배</string>
+</resources>
