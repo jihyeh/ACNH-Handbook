@@ -26,6 +26,7 @@ class NookipediaNetwork {
                 val json = Json {
                     ignoreUnknownKeys = true
                     encodeDefaults = true
+                    prettyPrint = true
                 }
                 register(ContentType.Application.Json, KotlinxSerializationConverter(json))
                 register(ContentType.Text.Plain, KotlinxSerializationConverter(json))
