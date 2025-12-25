@@ -38,7 +38,7 @@ fun NavigationRoot(
             entryProvider {
                 entry<Route.Home> {
                     HomeScreen { item ->
-                        backStack.add(Route.List(item.id))
+                        backStack.add(Route.List(item.name))
                     }
                 }
 

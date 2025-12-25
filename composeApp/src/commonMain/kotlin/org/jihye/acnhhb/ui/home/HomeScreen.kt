@@ -2,7 +2,6 @@ package org.jihye.acnhhb.ui.home
 
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_title
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,15 +36,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    onClick: (item: HomeItem) -> Unit = {},
+    onClick: (item: Category) -> Unit = {},
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
                 .padding(paddingValues),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -65,11 +63,10 @@ fun HomeScreen(
                 columns = GridCells.Fixed(4),
                 horizontalArrangement = Arrangement.spacedBy(18.dp),
                 verticalArrangement = Arrangement.spacedBy(18.dp),
-                modifier = Modifier
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize()
                     .padding(horizontal = 16.dp)
             ) {
-                items(homeItems) { item ->
+                items(Category.entries) { item ->
                     HomeItemCard(
                         item = item,
                         onClick = { onClick(item) }
@@ -81,10 +78,12 @@ fun HomeScreen(
 }
 
 @Composable
-fun HomeItemCard(item: HomeItem, onClick: () -> Unit) {
+fun HomeItemCard(
+    item: Category,
+    onClick: () -> Unit = {},
+) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
@@ -97,14 +96,13 @@ fun HomeItemCard(item: HomeItem, onClick: () -> Unit) {
             painter = painterResource(item.icon),
             contentDescription = stringResource(item.title),
             tint = Color.Unspecified,
-            modifier = Modifier
-                .background(Color.Unspecified)
-                .padding(top = 12.dp)
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .padding(top = 12.dp),
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp),
+            modifier = Modifier.fillMaxWidth()
+                .padding(bottom = 12.dp),
             text = stringResource(item.title),
             style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.SemiBold,
