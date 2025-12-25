@@ -15,11 +15,13 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
+import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
+import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
 
 @Composable
 fun NavigationRoot(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val backStack: MutableList<Route> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
@@ -38,7 +40,17 @@ fun NavigationRoot(
             entryProvider {
                 entry<Route.Home> {
                     HomeScreen { item ->
-                        backStack.add(Route.List(item.name))
+                        if (item == Category.FLOWER_BREED) {
+                            backStack.add(Route.FlowerBreeding)
+                        } else {
+                            backStack.add(Route.List(item.name))
+                        }
+                    }
+                }
+
+                entry<Route.FlowerBreeding> {
+                    FlowerBreedingScreen {
+                        backStack.removeLastOrNull()
                     }
                 }
 

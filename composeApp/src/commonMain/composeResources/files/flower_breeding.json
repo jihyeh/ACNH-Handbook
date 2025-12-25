@@ -1,0 +1,292 @@
+{
+  "breeding": [
+    {
+      "flowerType": "WINDFLOWER",
+      "rows": [
+        {
+          "parent1": { "type": "WINDFLOWER", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "WINDFLOWER", "color": "ORANGE", "fromFlowerBag": true },
+          "offspring": { "type": "WINDFLOWER", "color": "PINK", "fromFlowerBag": false },
+          "chance": 100.0
+        },
+        {
+          "parent1": { "type": "WINDFLOWER", "color": "WHITE", "fromFlowerBag": true },
+          "parent2": { "type": "WINDFLOWER", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "WINDFLOWER", "color": "BLUE", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "WINDFLOWER", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "WINDFLOWER", "color": "BLUE", "fromFlowerBag": false },
+          "offspring": { "type": "WINDFLOWER", "color": "RED", "fromFlowerBag": false },
+          "chance": 100.0
+        },
+        {
+          "parent1": { "type": "WINDFLOWER", "color": "RED", "fromFlowerBag": false },
+          "parent2": { "type": "WINDFLOWER", "color": "RED", "fromFlowerBag": false },
+          "offspring": { "type": "WINDFLOWER", "color": "PURPLE", "fromFlowerBag": false },
+          "chance": 6.25
+        }
+      ]
+    },
+    {
+      "flowerType": "PANSY",
+      "rows": [
+        {
+          "parent1": { "type": "PANSY", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "PANSY", "color": "YELLOW", "fromFlowerBag": true },
+          "offspring": { "type": "PANSY", "color": "ORANGE", "fromFlowerBag": false },
+          "chance": 100.0
+        },
+        {
+          "parent1": { "type": "PANSY", "color": "WHITE", "fromFlowerBag": true },
+          "parent2": { "type": "PANSY", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "PANSY", "color": "BLUE", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "PANSY", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "PANSY", "color": "BLUE", "fromFlowerBag": false },
+          "offspring": { "type": "PANSY", "color": "RED", "fromFlowerBag": false },
+          "chance": 100.0
+        },
+        {
+          "parent1": { "type": "PANSY", "color": "RED", "fromFlowerBag": false },
+          "parent2": { "type": "PANSY", "color": "RED", "fromFlowerBag": false },
+          "offspring": { "type": "PANSY", "color": "PURPLE", "fromFlowerBag": false },
+          "chance": 6.25
+        }
+      ]
+    },
+    {
+      "flowerType": "HYACINTH",
+      "rows": [
+        {
+          "parent1": { "type": "HYACINTH", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "HYACINTH", "color": "YELLOW", "fromFlowerBag": true },
+          "offspring": { "type": "HYACINTH", "color": "ORANGE", "fromFlowerBag": false },
+          "chance": 50.0
+        },
+        {
+          "parent1": { "type": "HYACINTH", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "HYACINTH", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "HYACINTH", "color": "PINK", "fromFlowerBag": false },
+          "chance": 50.0
+        },
+        {
+          "parent1": { "type": "HYACINTH", "color": "WHITE", "fromFlowerBag": true },
+          "parent2": { "type": "HYACINTH", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "HYACINTH", "color": "BLUE", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "HYACINTH", "color": "ORANGE", "fromFlowerBag": false },
+          "parent2": { "type": "HYACINTH", "color": "ORANGE", "fromFlowerBag": false },
+          "offspring": { "type": "HYACINTH", "color": "BLUE", "fromFlowerBag": false },
+          "chance": 12.5
+        },
+        {
+          "parent1": { "type": "HYACINTH", "color": "ORANGE", "fromFlowerBag": false },
+          "parent2": { "type": "HYACINTH", "color": "ORANGE", "fromFlowerBag": false },
+          "offspring": { "type": "HYACINTH", "color": "PURPLE", "fromFlowerBag": false },
+          "chance": 6.25
+        },
+        {
+          "parent1": { "type": "HYACINTH", "color": "BLUE", "fromFlowerBag": false },
+          "parent2": { "type": "HYACINTH", "color": "BLUE", "fromFlowerBag": false },
+          "offspring": { "type": "HYACINTH", "color": "PURPLE", "fromFlowerBag": false },
+          "chance": 25.0
+        }
+      ]
+    },
+    {
+      "flowerType": "TULIP",
+      "rows": [
+        {
+          "parent1": { "type": "TULIP", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "TULIP", "color": "RED", "fromFlowerBag": true },
+          "offspring": { "type": "TULIP", "color": "BLACK", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "TULIP", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "TULIP", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "TULIP", "color": "PINK", "fromFlowerBag": false },
+          "chance": 50.0
+        },
+        {
+          "parent1": { "type": "TULIP", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "TULIP", "color": "YELLOW", "fromFlowerBag": true },
+          "offspring": { "type": "TULIP", "color": "ORANGE", "fromFlowerBag": false },
+          "chance": 50.0
+        },
+        {
+          "parent1": { "type": "TULIP", "color": "ORANGE", "fromFlowerBag": false },
+          "parent2": { "type": "TULIP", "color": "ORANGE", "fromFlowerBag": false },
+          "offspring": { "type": "TULIP", "color": "PURPLE", "fromFlowerBag": false },
+          "chance": 6.25
+        }
+      ]
+    },
+    {
+      "flowerType": "ROSE",
+      "rows": [
+        {
+          "parent1": { "type": "ROSE", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "ROSE", "color": "RED", "fromFlowerBag": true },
+          "offspring": { "type": "ROSE", "color": "PINK", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "ROSE", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "ROSE", "color": "RED", "fromFlowerBag": true },
+          "offspring": { "type": "ROSE", "color": "BLACK", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "ROSE", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "ROSE", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "ROSE", "color": "PINK", "fromFlowerBag": false },
+          "chance": 50.0
+        },
+        {
+          "parent1": { "type": "ROSE", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "ROSE", "color": "YELLOW", "fromFlowerBag": true },
+          "offspring": { "type": "ROSE", "color": "ORANGE", "fromFlowerBag": false },
+          "chance": 50.0
+        },
+        {
+          "parent1": { "type": "ROSE", "color": "WHITE", "fromFlowerBag": true },
+          "parent2": { "type": "ROSE", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "ROSE", "color": "PURPLE", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "ROSE", "color": "PURPLE", "fromFlowerBag": false },
+          "parent2": { "type": "ROSE", "color": "RED", "fromFlowerBag": true },
+          "offspring": { "type": "ROSE", "color": "PINK", "fromFlowerBag": false },
+          "chance": 50.0
+        },
+        {
+          "parent1": { "type": "ROSE", "color": "PINK", "fromFlowerBag": false },
+          "parent2": { "type": "ROSE", "color": "YELLOW", "fromFlowerBag": true },
+          "offspring": { "type": "ROSE", "color": "RED", "fromFlowerBag": false },
+          "chance": 12.5
+        },
+        {
+          "parent1": { "type": "ROSE", "color": "RED", "fromFlowerBag": false },
+          "parent2": { "type": "ROSE", "color": "RED", "fromFlowerBag": false },
+          "offspring": { "type": "ROSE", "color": "BLUE", "fromFlowerBag": false },
+          "chance": 1.56
+        }
+      ]
+    },
+    {
+      "flowerType": "COSMOS",
+      "rows": [
+        {
+          "parent1": { "type": "COSMOS", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "COSMOS", "color": "YELLOW", "fromFlowerBag": true },
+          "offspring": { "type": "COSMOS", "color": "ORANGE", "fromFlowerBag": false },
+          "chance": 100.0
+        },
+        {
+          "parent1": { "type": "COSMOS", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "COSMOS", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "COSMOS", "color": "PINK", "fromFlowerBag": false },
+          "chance": 100.0
+        },
+        {
+          "parent1": { "type": "COSMOS", "color": "ORANGE", "fromFlowerBag": false },
+          "parent2": { "type": "COSMOS", "color": "ORANGE", "fromFlowerBag": false },
+          "offspring": { "type": "COSMOS", "color": "BLACK", "fromFlowerBag": false },
+          "chance": 5.86
+        }
+      ]
+    },
+    {
+      "flowerType": "LILY",
+      "rows": [
+        {
+          "parent1": { "type": "LILY", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "LILY", "color": "RED", "fromFlowerBag": true },
+          "offspring": { "type": "LILY", "color": "BLACK", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "LILY", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "LILY", "color": "RED", "fromFlowerBag": true },
+          "offspring": { "type": "LILY", "color": "PINK", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "LILY", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "LILY", "color": "YELLOW", "fromFlowerBag": true },
+          "offspring": { "type": "LILY", "color": "ORANGE", "fromFlowerBag": false },
+          "chance": 50.0
+        },
+        {
+          "parent1": { "type": "LILY", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "LILY", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "LILY", "color": "PINK", "fromFlowerBag": false },
+          "chance": 50.0
+        }
+      ]
+    },
+    {
+      "flowerType": "MUM",
+      "rows": [
+        {
+          "parent1": { "type": "MUM", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "MUM", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "MUM", "color": "PINK", "fromFlowerBag": false },
+          "chance": 100.0
+        },
+        {
+          "parent1": { "type": "MUM", "color": "RED", "fromFlowerBag": true },
+          "parent2": { "type": "MUM", "color": "YELLOW", "fromFlowerBag": true },
+          "offspring": { "type": "MUM", "color": "YELLOW", "fromFlowerBag": false },
+          "chance": 100.0
+        },
+        {
+          "parent1": { "type": "MUM", "color": "WHITE", "fromFlowerBag": true },
+          "parent2": { "type": "MUM", "color": "WHITE", "fromFlowerBag": true },
+          "offspring": { "type": "MUM", "color": "PURPLE", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "MUM", "color": "YELLOW", "fromFlowerBag": false },
+          "parent2": { "type": "MUM", "color": "YELLOW", "fromFlowerBag": false },
+          "offspring": { "type": "MUM", "color": "PURPLE", "fromFlowerBag": false },
+          "chance": 25.0
+        },
+        {
+          "parent1": { "type": "MUM", "color": "YELLOW", "fromFlowerBag": false },
+          "parent2": { "type": "MUM", "color": "YELLOW", "fromFlowerBag": false },
+          "offspring": { "type": "MUM", "color": "GREEN", "fromFlowerBag": false },
+          "chance": 6.25
+        },
+        {
+          "parent1": { "type": "MUM", "color": "PURPLE", "fromFlowerBag": false },
+          "parent2": { "type": "MUM", "color": "PURPLE", "fromFlowerBag": false },
+          "offspring": { "type": "MUM", "color": "GREEN", "fromFlowerBag": false },
+          "chance": 25.0
+        }
+      ]
+    }
+  ],
+  "special": [
+    {
+      "flower": { "type": "ROSE", "color": "BLACK", "fromFlowerBag": false },
+      "condition": null,
+      "conditionIconName": "icon_golden_watering_can_100",
+      "offspring": { "type": "ROSE", "color": "GOLD", "fromFlowerBag": false }
+    },
+    {
+      "flower": { "type": "LILY_OF_THE_VALLEY", "color": "WHITE", "fromFlowerBag": false },
+      "condition": "When island rating is five for more than 1 day",
+      "conditionIconName": null,
+      "offspring": null
+    }
+  ]
+}
