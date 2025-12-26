@@ -79,12 +79,16 @@ kotlin {
     }
 }
 
+val appVersionName = "1.0"
+val appVersionCode = 1
+
 buildConfig {
     packageName("org.jihye.acnhhb")
 
     val localProperties = gradleLocalProperties(rootDir, providers)
     val apiKey = localProperties.getProperty("NOOKIPEDIA_API_KEY") ?: ""
     buildConfigField("String", "API_KEY", "\"$apiKey\"")
+    buildConfigField("String", "APP_VERSION", "\"$appVersionName\"")
 }
 
 android {
@@ -95,8 +99,8 @@ android {
         applicationId = "org.jihye.acnhhb"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
     }
     packaging {
         resources {

@@ -30,9 +30,10 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun ACNHHandbookTheme(
-    content: @Composable () -> Unit
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
 ) {
-    val colorScheme = if (isSystemInDarkTheme()) DarkColorScheme else LightColorScheme
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
