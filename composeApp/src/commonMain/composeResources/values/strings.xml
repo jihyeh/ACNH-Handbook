@@ -18,5 +18,5 @@
     <string name="settings_hemisphere_north">북반구</string>
     <string name="settings_hemisphere_south">남반구</string>
     <string name="settings_close">Close</string>
-    <string name="settings_version">Version: v</string>
+    <string name="settings_version">Version: </string>
 </resources>
