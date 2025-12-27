@@ -6,15 +6,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
 import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
@@ -23,10 +21,10 @@ import org.jihye.acnhhb.ui.home.HomeScreen
 fun NavigationRoot(
     modifier: Modifier = Modifier,
 ) {
-    val backStack: MutableList<Route> =
-        rememberSerializable(serializer = SnapshotStateListSerializer()) {
-            mutableStateListOf(Route.Home)
-        }
+    val backStack = rememberNavBackStack(
+        configuration = config,
+        Route.Home
+    )
 
     NavDisplay(
         backStack = backStack,
