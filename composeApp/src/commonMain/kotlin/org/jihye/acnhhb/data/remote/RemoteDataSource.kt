@@ -2,16 +2,20 @@ package org.jihye.acnhhb.data.remote
 
 import org.jihye.acnhhb.data.remote.dto.VillagerResponse
 
-class RemoteDataSource(private val client: NookipediaNetwork) {
+class RemoteDataSource(
+    private val client: NookipediaNetwork,
+) {
     suspend fun fetchVillagers(
         species: String?,
         personality: String?,
         game: String?,
+        isNhDetails: String?,
     ): List<VillagerResponse> {
         val params = mapOf(
             "species" to species,
             "personality" to personality,
             "game" to game,
+            "nhdetails" to isNhDetails,
         )
         return client.get("/villagers", params)
     }

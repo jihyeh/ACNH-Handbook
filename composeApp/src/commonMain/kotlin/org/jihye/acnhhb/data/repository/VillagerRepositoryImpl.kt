@@ -16,6 +16,7 @@ class VillagerRepositoryImpl(
             species = null,
             personality = null,
             game = "nh",
+            isNhDetails = "true",
         )
         emit(
             remoteVillagers.map { it.toDomain() }

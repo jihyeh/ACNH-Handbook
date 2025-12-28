@@ -29,4 +29,40 @@ data class VillagerResponse(
     val clothing: String? = null,
     val islander: Boolean? = null,
     val debut: String? = null,
+    @SerialName("nh_details")
+    val nhDetails: NhDetails? = null,
+)
+
+@Serializable
+data class NhDetails(
+    @SerialName("image_url")
+    val imageUrl: String? = null,
+    @SerialName("photo_url")
+    val photoUrl: String? = null,
+    @SerialName("icon_url")
+    val iconUrl: String? = null,
+    val quote: String? = null,
+    @SerialName("sub-personality")
+    val subPersonality: String? = null,
+    val catchphrase: String? = null,
+    val clothing: String? = null,
+    @SerialName("clothing_variation")
+    val clothingVariation: String? = null,
+    @SerialName("fav_styles")
+    val favStyles: List<String> = emptyList(),
+    @SerialName("fav_colors")
+    val favColors: List<String> = emptyList(),
+    val hobby: String? = null,
+    @SerialName("house_interior_url")
+    val houseInteriorUrl: String? = null,
+    @SerialName("house_exterior_url")
+    val houseExteriorUrl: String? = null,
+    @SerialName("house_wallpaper")
+    val houseWallpaper: String? = null,
+    @SerialName("house_flooring")
+    val houseFlooring: String? = null,
+    @SerialName("house_music")
+    val houseMusic: String? = null,
+    @SerialName("house_music_note")
+    val houseMusicNote: String? = null,
 )
