@@ -52,6 +52,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jihye.acnhhb.domain.model.BreedingRow
 import org.jihye.acnhhb.domain.model.Flower
 import org.jihye.acnhhb.domain.model.FlowerTypeData
+import org.jihye.acnhhb.domain.model.SpecialBreeding
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -87,7 +88,8 @@ fun FlowerBreedingScreen(
 
                 is FlowerBreedingState.Success -> {
                     FlowerBreedingContent(
-                        flowerGroups = currentState.data.breeding
+                        flowerGroups = currentState.data.breeding,
+                        specialFlowers = currentState.data.special,
                     )
                 }
             }
@@ -96,7 +98,10 @@ fun FlowerBreedingScreen(
 }
 
 @Composable
-fun FlowerBreedingContent(flowerGroups: List<FlowerTypeData>) {
+fun FlowerBreedingContent(
+    flowerGroups: List<FlowerTypeData>,
+    specialFlowers: List<SpecialBreeding>,
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
@@ -104,6 +109,9 @@ fun FlowerBreedingContent(flowerGroups: List<FlowerTypeData>) {
     ) {
         items(flowerGroups) { flowerData ->
             FlowerBreedTableCard(flowerData)
+        }
+        item {
+            SpecialFlowerTableCard(specialFlowers)
         }
     }
 }
@@ -301,6 +309,173 @@ private fun FlowerIcon(
         contentDescription = "${flower.color} ${flower.type}",
         modifier = modifier.size(48.dp)
     )
+}
+
+@Composable
+private fun SpecialFlowerTableCard(
+    rows: List<SpecialBreeding>,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .border(
+                2.dp,
+                MaterialTheme.colorScheme.primaryContainer,
+                RoundedCornerShape(12.dp)
+            )
+    ) {
+        // Title
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .padding(vertical = 12.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Special flowers",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        }
+
+        // Header
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    MaterialTheme.colorScheme.primaryContainer.copy(
+                        alpha = 0.3f
+                    )
+                )
+                .padding(vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Flower",
+                modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.Bold
+            )
+            Box(
+                modifier = Modifier
+                    .width(1.dp)
+                    .height(24.dp)
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+            )
+            Text(
+                text = "Conditions",
+                modifier = Modifier.weight(1.5f),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.Bold
+            )
+            Box(
+                modifier = Modifier
+                    .width(1.dp)
+                    .height(24.dp)
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+            )
+            Text(
+                text = "Offspring",
+                modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        // Divider
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(2.dp)
+                .background(MaterialTheme.colorScheme.primaryContainer)
+        )
+
+        // Rows
+        rows.forEachIndexed { index, row ->
+            SpecialFlowerRowItem(row)
+            if (index < rows.size - 1) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f))
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SpecialFlowerRowItem(
+    row: SpecialBreeding,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Flower
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight(), contentAlignment = Alignment.Center
+        ) {
+            FlowerCell(row.flower)
+        }
+
+        VerticalDivider()
+
+        // Conditions
+        Box(
+            modifier = Modifier
+                .weight(1.5f)
+                .fillMaxHeight()
+                .padding(8.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                row.conditionIcon?.let {
+                    Image(
+                        painter = painterResource(it),
+                        contentDescription = null,
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
+                row.condition?.let {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodySmall,
+                        textAlign = TextAlign.Center,
+                        maxLines = 3
+                    )
+                }
+            }
+        }
+
+        VerticalDivider()
+
+        // Offspring
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight(), contentAlignment = Alignment.Center
+        ) {
+            row.offspring?.let {
+                FlowerCell(it)
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -7,6 +7,7 @@ import acnhhandbook.composeapp.generated.resources.ic_cosmos_pink_100
 import acnhhandbook.composeapp.generated.resources.ic_cosmos_red_100
 import acnhhandbook.composeapp.generated.resources.ic_cosmos_white_100
 import acnhhandbook.composeapp.generated.resources.ic_cosmos_yellow_100
+import acnhhandbook.composeapp.generated.resources.ic_golden_watering_can_100
 import acnhhandbook.composeapp.generated.resources.ic_hyacinth_blue_100
 import acnhhandbook.composeapp.generated.resources.ic_hyacinth_orange_100
 import acnhhandbook.composeapp.generated.resources.ic_hyacinth_pink_100
@@ -57,6 +58,7 @@ import acnhhandbook.composeapp.generated.resources.ic_windflower_red_100
 import acnhhandbook.composeapp.generated.resources.ic_windflower_white_100
 import org.jetbrains.compose.resources.DrawableResource
 import org.jihye.acnhhb.domain.model.Flower
+import org.jihye.acnhhb.domain.model.SpecialBreeding
 
 val Flower.iconRes: DrawableResource?
     get() {
@@ -67,6 +69,15 @@ val Flower.iconRes: DrawableResource?
             return Res.drawable.ic_lily_of_the_valley_white_100
         }
         return findFlowerResource(typeName, colorName)
+    }
+
+val SpecialBreeding.conditionIcon: DrawableResource?
+    get() {
+        return if ("golden_watering_can" == conditionIconName) {
+            Res.drawable.ic_golden_watering_can_100
+        } else {
+            null
+        }
     }
 
 private fun findFlowerResource(type: String, color: String): DrawableResource? {

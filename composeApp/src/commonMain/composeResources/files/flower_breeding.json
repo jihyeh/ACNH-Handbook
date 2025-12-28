@@ -279,12 +279,12 @@
     {
       "flower": { "type": "ROSE", "color": "BLACK", "fromFlowerBag": false },
       "condition": null,
-      "conditionIconName": "icon_golden_watering_can_100",
+      "conditionIconName": "golden_watering_can",
       "offspring": { "type": "ROSE", "color": "GOLD", "fromFlowerBag": false }
     },
     {
       "flower": { "type": "LILY_OF_THE_VALLEY", "color": "WHITE", "fromFlowerBag": false },
-      "condition": "When island rating is five for more than 1 day",
+      "condition": "섬 평판이 별점 5점인 상태로 1일 이상 유지될 때",
       "conditionIconName": null,
       "offspring": null
     }
