@@ -19,10 +19,6 @@ sealed interface Route : NavKey {
     data object FlowerBreeding : Route
 }
 
-val config = SavedStateConfiguration {
-    serializersModule = routeSerializersModule
-}
-
 /**
  * Navigation3가 Route의 하위 클래스들을 인식할 수 있도록
  * SerializersModule을 정의합니다. (필요 시 NavHost 설정에 주입)
@@ -33,4 +29,8 @@ val routeSerializersModule = SerializersModule {
         subclass(Route.List::class)
         subclass(Route.FlowerBreeding::class)
     }
+}
+
+val config = SavedStateConfiguration {
+    serializersModule = routeSerializersModule
 }
