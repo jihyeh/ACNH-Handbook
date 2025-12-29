@@ -1,13 +1,17 @@
 package org.jihye.acnhhb.data.remote.dto
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Availability(
-    val availability_array: List<AvailabilityArray>,
-    val times_by_month: Map<String, String>,
+    @SerialName("availability_array")
+    val availabilities: List<AvailabilityArray>,
+    @SerialName("times_by_month")
+    val timesByMonth: Map<String, String>,
     val months: String,
-    val months_array: List<Int>,
+    @SerialName("months_array")
+    val monthIndices: List<Int>,
 )
 
 @Serializable
