@@ -4,7 +4,6 @@ import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_villagers
 import acnhhandbook.composeapp.generated.resources.ic_villager_150
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -22,7 +21,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -47,6 +45,8 @@ import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jihye.acnhhb.domain.model.Villager
+import org.jihye.acnhhb.ui.components.ErrorContent
+import org.jihye.acnhhb.ui.components.LoadingContent
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -63,14 +63,7 @@ fun VillagerListScreen(
     ) { paddingValues ->
         when (val currentState = state) {
             is VillagerListState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                LoadingContent(modifier = Modifier.padding(paddingValues))
             }
 
             is VillagerListState.Success -> {
@@ -81,14 +74,10 @@ fun VillagerListScreen(
             }
 
             is VillagerListState.Error -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(text = currentState.message)
-                }
+                ErrorContent(
+                    message = currentState.message,
+                    modifier = Modifier.padding(paddingValues)
+                )
             }
         }
     }

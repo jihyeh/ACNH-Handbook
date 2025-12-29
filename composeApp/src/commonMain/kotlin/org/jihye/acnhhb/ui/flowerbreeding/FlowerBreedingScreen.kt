@@ -28,7 +28,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -53,6 +52,8 @@ import org.jihye.acnhhb.domain.model.BreedingRow
 import org.jihye.acnhhb.domain.model.Flower
 import org.jihye.acnhhb.domain.model.FlowerTypeData
 import org.jihye.acnhhb.domain.model.SpecialBreeding
+import org.jihye.acnhhb.ui.components.ErrorContent
+import org.jihye.acnhhb.ui.components.LoadingContent
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,16 +74,12 @@ fun FlowerBreedingScreen(
         Box(modifier = Modifier.padding(paddingValues).fillMaxSize()) {
             when (val currentState = state) {
                 is FlowerBreedingState.Loading -> {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center)
-                    )
+                    LoadingContent()
                 }
 
                 is FlowerBreedingState.Error -> {
-                    Text(
-                        text = currentState.message,
-                        color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.align(Alignment.Center)
+                    ErrorContent(
+                        message = currentState.message,
                     )
                 }
 
