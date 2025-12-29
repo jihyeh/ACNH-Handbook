@@ -1,5 +1,6 @@
 package org.jihye.acnhhb.data.remote
 
+import org.jihye.acnhhb.data.remote.dto.ArtResponse
 import org.jihye.acnhhb.data.remote.dto.BugResponse
 import org.jihye.acnhhb.data.remote.dto.FishResponse
 import org.jihye.acnhhb.data.remote.dto.SeaCreatureResponse
@@ -60,5 +61,16 @@ class RemoteDataSource(
             "thumbsize" to thumbnailSize?.toString(),
         )
         return client.get("/nh/sea", params)
+    }
+
+    suspend fun fetchArt(
+        isExcludeFakes: String?,
+        thumbnailSize: Int?,
+    ): List<ArtResponse> {
+        val params = mapOf(
+            "excludefakes" to isExcludeFakes,
+            "thumbsize" to thumbnailSize?.toString(),
+        )
+        return client.get("/nh/art", params)
     }
 }

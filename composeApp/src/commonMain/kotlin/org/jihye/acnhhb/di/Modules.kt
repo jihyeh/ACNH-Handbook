@@ -3,18 +3,21 @@ package org.jihye.acnhhb.di
 import org.jihye.acnhhb.data.createDataStore
 import org.jihye.acnhhb.data.remote.NookipediaNetwork
 import org.jihye.acnhhb.data.remote.RemoteDataSource
+import org.jihye.acnhhb.data.repository.ArtRepositoryImpl
 import org.jihye.acnhhb.data.repository.BugRepositoryImpl
 import org.jihye.acnhhb.data.repository.FishRepositoryImpl
 import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
 import org.jihye.acnhhb.data.repository.SeaCreatureRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
 import org.jihye.acnhhb.data.repository.VillagerRepositoryImpl
+import org.jihye.acnhhb.domain.repository.ArtRepository
 import org.jihye.acnhhb.domain.repository.BugRepository
 import org.jihye.acnhhb.domain.repository.FishRepository
 import org.jihye.acnhhb.domain.repository.FlowerBreedingRepository
 import org.jihye.acnhhb.domain.repository.SeaCreatureRepository
 import org.jihye.acnhhb.domain.repository.SettingsRepository
 import org.jihye.acnhhb.domain.repository.VillagerRepository
+import org.jihye.acnhhb.ui.art.ArtViewModel
 import org.jihye.acnhhb.ui.bug.BugViewModel
 import org.jihye.acnhhb.ui.fish.FishViewModel
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingViewModel
@@ -41,6 +44,7 @@ val repositoryModule = module {
     singleOf(::FishRepositoryImpl) { bind<FishRepository>() }
     singleOf(::BugRepositoryImpl) { bind<BugRepository>() }
     singleOf(::SeaCreatureRepositoryImpl) { bind<SeaCreatureRepository>() }
+    singleOf(::ArtRepositoryImpl) { bind<ArtRepository>() }
 }
 
 val viewModelModule = module {
@@ -50,6 +54,7 @@ val viewModelModule = module {
     viewModelOf(::FishViewModel)
     viewModelOf(::BugViewModel)
     viewModelOf(::SeaCreatureViewModel)
+    viewModelOf(::ArtViewModel)
 }
 
 val appModules = listOf(dataModule, repositoryModule, viewModelModule)

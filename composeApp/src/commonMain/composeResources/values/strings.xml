@@ -19,4 +19,6 @@
     <string name="settings_hemisphere_south">남반구</string>
     <string name="settings_close">Close</string>
     <string name="settings_version">Version: </string>
+
+    <string name="fake_exist">가품 있음</string>
 </resources>
