@@ -13,6 +13,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import org.jihye.acnhhb.ui.bug.BugListScreen
 import org.jihye.acnhhb.ui.fish.FishListScreen
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
 import org.jihye.acnhhb.ui.home.Category
@@ -68,6 +69,12 @@ fun NavigationRoot(
 
                         Category.FISH.name -> {
                             FishListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        Category.BUGS.name -> {
+                            BugListScreen {
                                 backStack.removeLastOrNull()
                             }
                         }

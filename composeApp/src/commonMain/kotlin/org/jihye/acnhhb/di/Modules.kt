@@ -3,14 +3,17 @@ package org.jihye.acnhhb.di
 import org.jihye.acnhhb.data.createDataStore
 import org.jihye.acnhhb.data.remote.NookipediaNetwork
 import org.jihye.acnhhb.data.remote.RemoteDataSource
+import org.jihye.acnhhb.data.repository.BugRepositoryImpl
 import org.jihye.acnhhb.data.repository.FishRepositoryImpl
 import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
 import org.jihye.acnhhb.data.repository.VillagerRepositoryImpl
+import org.jihye.acnhhb.domain.repository.BugRepository
 import org.jihye.acnhhb.domain.repository.FishRepository
 import org.jihye.acnhhb.domain.repository.FlowerBreedingRepository
 import org.jihye.acnhhb.domain.repository.SettingsRepository
 import org.jihye.acnhhb.domain.repository.VillagerRepository
+import org.jihye.acnhhb.ui.bug.BugViewModel
 import org.jihye.acnhhb.ui.fish.FishViewModel
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingViewModel
 import org.jihye.acnhhb.ui.settings.SettingsViewModel
@@ -29,6 +32,7 @@ val appModule = module {
     singleOf(::FlowerBreedingRepositoryImpl) { bind<FlowerBreedingRepository>() }
     singleOf(::SettingsRepositoryImpl) { bind<SettingsRepository>() }
     singleOf(::FishRepositoryImpl) { bind<FishRepository>() }
+    singleOf(::BugRepositoryImpl) { bind<BugRepository>() }
 
     single { createDataStore() }
 
@@ -36,6 +40,7 @@ val appModule = module {
     viewModelOf(::SettingsViewModel)
     viewModelOf(::VillagerViewModel)
     viewModelOf(::FishViewModel)
+    viewModelOf(::BugViewModel)
 }
 
 fun startDependencyInjection(appDeclaration: KoinAppDeclaration = {}) = startKoin {
