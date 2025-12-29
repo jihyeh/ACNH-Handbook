@@ -13,6 +13,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import org.jihye.acnhhb.ui.fish.FishListScreen
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
 import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
@@ -58,21 +59,31 @@ fun NavigationRoot(
                 }
 
                 entry<Route.List> { list ->
-                    if (list.title == Category.VILLAGERS.name) {
-                        VillagerListScreen {
-                            backStack.removeLastOrNull()
+                    when (list.title) {
+                        Category.VILLAGERS.name -> {
+                            VillagerListScreen {
+                                backStack.removeLastOrNull()
+                            }
                         }
-                    } else {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(MaterialTheme.colorScheme.background),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                "Screen: ${list.title}",
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
+
+                        Category.FISH.name -> {
+                            FishListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        else -> {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(MaterialTheme.colorScheme.background),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    "Screen: ${list.title}",
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
                         }
                     }
                 }

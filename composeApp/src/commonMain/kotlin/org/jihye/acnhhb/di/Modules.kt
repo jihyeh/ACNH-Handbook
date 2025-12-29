@@ -11,6 +11,7 @@ import org.jihye.acnhhb.domain.repository.FishRepository
 import org.jihye.acnhhb.domain.repository.FlowerBreedingRepository
 import org.jihye.acnhhb.domain.repository.SettingsRepository
 import org.jihye.acnhhb.domain.repository.VillagerRepository
+import org.jihye.acnhhb.ui.fish.FishViewModel
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingViewModel
 import org.jihye.acnhhb.ui.settings.SettingsViewModel
 import org.jihye.acnhhb.ui.villager.VillagerViewModel
@@ -34,6 +35,7 @@ val appModule = module {
     viewModelOf(::FlowerBreedingViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::VillagerViewModel)
+    viewModelOf(::FishViewModel)
 }
 
 fun startDependencyInjection(appDeclaration: KoinAppDeclaration = {}) = startKoin {
