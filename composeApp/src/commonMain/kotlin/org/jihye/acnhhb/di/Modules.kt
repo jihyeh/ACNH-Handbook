@@ -7,6 +7,7 @@ import org.jihye.acnhhb.data.repository.ArtRepositoryImpl
 import org.jihye.acnhhb.data.repository.BugRepositoryImpl
 import org.jihye.acnhhb.data.repository.FishRepositoryImpl
 import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
+import org.jihye.acnhhb.data.repository.FossilRepositoryImpl
 import org.jihye.acnhhb.data.repository.SeaCreatureRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
 import org.jihye.acnhhb.data.repository.VillagerRepositoryImpl
@@ -14,6 +15,7 @@ import org.jihye.acnhhb.domain.repository.ArtRepository
 import org.jihye.acnhhb.domain.repository.BugRepository
 import org.jihye.acnhhb.domain.repository.FishRepository
 import org.jihye.acnhhb.domain.repository.FlowerBreedingRepository
+import org.jihye.acnhhb.domain.repository.FossilRepository
 import org.jihye.acnhhb.domain.repository.SeaCreatureRepository
 import org.jihye.acnhhb.domain.repository.SettingsRepository
 import org.jihye.acnhhb.domain.repository.VillagerRepository
@@ -21,6 +23,7 @@ import org.jihye.acnhhb.ui.art.ArtViewModel
 import org.jihye.acnhhb.ui.bug.BugViewModel
 import org.jihye.acnhhb.ui.fish.FishViewModel
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingViewModel
+import org.jihye.acnhhb.ui.fossil.FossilViewModel
 import org.jihye.acnhhb.ui.sea.SeaCreatureViewModel
 import org.jihye.acnhhb.ui.settings.SettingsViewModel
 import org.jihye.acnhhb.ui.villager.VillagerViewModel
@@ -45,6 +48,7 @@ val repositoryModule = module {
     singleOf(::BugRepositoryImpl) { bind<BugRepository>() }
     singleOf(::SeaCreatureRepositoryImpl) { bind<SeaCreatureRepository>() }
     singleOf(::ArtRepositoryImpl) { bind<ArtRepository>() }
+    singleOf(::FossilRepositoryImpl) { bind<FossilRepository>() }
 }
 
 val viewModelModule = module {
@@ -55,6 +59,7 @@ val viewModelModule = module {
     viewModelOf(::BugViewModel)
     viewModelOf(::SeaCreatureViewModel)
     viewModelOf(::ArtViewModel)
+    viewModelOf(::FossilViewModel)
 }
 
 val appModules = listOf(dataModule, repositoryModule, viewModelModule)

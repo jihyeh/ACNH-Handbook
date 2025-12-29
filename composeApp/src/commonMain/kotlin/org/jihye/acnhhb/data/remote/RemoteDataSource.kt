@@ -3,6 +3,7 @@ package org.jihye.acnhhb.data.remote
 import org.jihye.acnhhb.data.remote.dto.ArtResponse
 import org.jihye.acnhhb.data.remote.dto.BugResponse
 import org.jihye.acnhhb.data.remote.dto.FishResponse
+import org.jihye.acnhhb.data.remote.dto.FossilResponse
 import org.jihye.acnhhb.data.remote.dto.SeaCreatureResponse
 import org.jihye.acnhhb.data.remote.dto.VillagerResponse
 
@@ -72,5 +73,14 @@ class RemoteDataSource(
             "thumbsize" to thumbnailSize?.toString(),
         )
         return client.get("/nh/art", params)
+    }
+
+    suspend fun fetchFossils(
+        thumbnailSize: Int?,
+    ): List<FossilResponse> {
+        val params = mapOf(
+            "thumbsize" to thumbnailSize?.toString(),
+        )
+        return client.get("/nh/fossils/individuals", params)
     }
 }

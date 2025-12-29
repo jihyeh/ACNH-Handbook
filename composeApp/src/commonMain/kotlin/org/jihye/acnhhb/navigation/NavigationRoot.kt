@@ -17,6 +17,7 @@ import org.jihye.acnhhb.ui.art.ArtListScreen
 import org.jihye.acnhhb.ui.bug.BugListScreen
 import org.jihye.acnhhb.ui.fish.FishListScreen
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
+import org.jihye.acnhhb.ui.fossil.FossilListScreen
 import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
 import org.jihye.acnhhb.ui.sea.SeaCreatureListScreen
@@ -89,6 +90,12 @@ fun NavigationRoot(
 
                         Category.ART.name -> {
                             ArtListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        Category.FOSSILS.name -> {
+                            FossilListScreen {
                                 backStack.removeLastOrNull()
                             }
                         }
