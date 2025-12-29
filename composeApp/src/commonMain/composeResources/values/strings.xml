@@ -21,4 +21,25 @@
     <string name="settings_version">Version: </string>
 
     <string name="fake_exist">가품 있음</string>
+
+    <string name="material_type">타입</string>
+    <string name="material_type_none">전체</string>
+    <string name="material_type_bamboo">대나무</string>
+    <string name="material_type_egg">달걀</string>
+    <string name="material_type_snowflake">눈송이</string>
+    <string name="material_type_star_fragment">별의 조각</string>
+    <string name="material_type_wood">나무 재료</string>
+    <string name="material_type_shell">조개</string>
+    <string name="material_type_feather">깃털</string>
+    <string name="material_type_fruit">과일</string>
+    <string name="material_type_flower">꽃</string>
+    <string name="material_type_plant">식물</string>
+    <string name="material_type_tree">나무</string>
+    <string name="material_type_bush">덤블</string>
+    <string name="material_type_mushroom">버섯</string>
+    <string name="material_type_ingredient">요리 재료</string>
+    <string name="material_type_ore">광석</string>
+    <string name="material_type_fence">울타리</string>
+    <string name="material_type_other">기타</string>
+    <string name="material_type_trash">쓰레기</string>
 </resources>

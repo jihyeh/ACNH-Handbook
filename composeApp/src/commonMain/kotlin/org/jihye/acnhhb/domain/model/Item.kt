@@ -20,7 +20,25 @@ data class Item(
     val notes: String,
     val availability: List<Availability>,
     val buy: List<Buy>,
-)
+) {
+    val category: ItemCategory
+        get() = when {
+            materialType.isNotEmpty() -> {
+                ItemCategory.entries.find {
+                    it.dbValue?.equals(materialType, ignoreCase = true) == true
+                } ?: ItemCategory.OTHER
+            }
+            isFence -> {
+                ItemCategory.FENCE
+            }
+            plantType.isNotEmpty() -> {
+                ItemCategory.entries.find {
+                    it.dbValue?.equals(plantType, ignoreCase = true) == true
+                } ?: ItemCategory.OTHER
+            }
+            else -> ItemCategory.OTHER
+        }
+}
 
 data class Availability(
     val from: String,
