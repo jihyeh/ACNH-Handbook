@@ -4,6 +4,7 @@ import org.jihye.acnhhb.data.remote.dto.ArtResponse
 import org.jihye.acnhhb.data.remote.dto.BugResponse
 import org.jihye.acnhhb.data.remote.dto.FishResponse
 import org.jihye.acnhhb.data.remote.dto.FossilResponse
+import org.jihye.acnhhb.data.remote.dto.GyroidResponse
 import org.jihye.acnhhb.data.remote.dto.ItemResponse
 import org.jihye.acnhhb.data.remote.dto.SeaCreatureResponse
 import org.jihye.acnhhb.data.remote.dto.VillagerResponse
@@ -95,4 +96,16 @@ class RemoteDataSource(
         )
         return client.get("/nh/items", params)
     }
+
+    suspend fun fetchGyroids(
+        sound: String?,
+        isExcludeDetails: String?,
+    ): List<GyroidResponse> {
+        val params = mapOf(
+            "sound" to sound,
+            "excludedetails" to isExcludeDetails,
+        )
+        return client.get("/nh/gyroids", params)
+    }
+
 }
