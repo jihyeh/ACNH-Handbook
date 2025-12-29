@@ -3,7 +3,7 @@ package org.jihye.acnhhb.ui.art
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.fake_exist
 import acnhhandbook.composeapp.generated.resources.home_art
-import acnhhandbook.composeapp.generated.resources.ic_artwork_150
+import acnhhandbook.composeapp.generated.resources.ic_home_art
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -55,7 +54,7 @@ fun ArtListScreen(
         topBar = {
             ListScreenTopBar(
                 title = stringResource(Res.string.home_art),
-                icon = Res.drawable.ic_artwork_150,
+                icon = Res.drawable.ic_home_art,
                 onBackClick = onBack
             )
         }

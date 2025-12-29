@@ -3,7 +3,7 @@ package org.jihye.acnhhb.ui.flowerbreeding
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_flower_breed
 import acnhhandbook.composeapp.generated.resources.ic_flower_bag_128
-import acnhhandbook.composeapp.generated.resources.ic_flower_breed_150
+import acnhhandbook.composeapp.generated.resources.ic_home_flower_breed
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -61,7 +61,7 @@ fun FlowerBreedingScreen(
         topBar = {
             ListScreenTopBar(
                 title = stringResource(Res.string.home_flower_breed),
-                icon = Res.drawable.ic_flower_breed_150,
+                icon = Res.drawable.ic_home_flower_breed,
                 onBackClick = onBack
             )
         },

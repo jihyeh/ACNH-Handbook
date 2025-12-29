@@ -2,7 +2,7 @@ package org.jihye.acnhhb.ui.item
 
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_items
-import acnhhandbook.composeapp.generated.resources.ic_item_150
+import acnhhandbook.composeapp.generated.resources.ic_home_item
 import acnhhandbook.composeapp.generated.resources.material_type
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -62,7 +62,7 @@ fun ItemListScreen(
         topBar = {
             ListScreenTopBar(
                 title = stringResource(Res.string.home_items),
-                icon = Res.drawable.ic_item_150,
+                icon = Res.drawable.ic_home_item,
                 onBackClick = onBack
             )
         }

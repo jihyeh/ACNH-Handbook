@@ -9,6 +9,13 @@
     <string name="home_items">아이템</string>
     <string name="home_events">이벤트</string>
     <string name="home_flower_breed">꽃 교배</string>
+    <string name="home_furniture">가구</string>
+    <string name="home_interior">인테리어</string>
+    <string name="home_tools">도구</string>
+    <string name="home_photos">사진/포스터</string>
+    <string name="home_recipes">레시피</string>
+    <string name="home_gyroids">토용</string>
+    <string name="home_clothing">의류</string>
 
     <string name="settings_title">설정</string>
     <string name="settings_theme">테마</string>

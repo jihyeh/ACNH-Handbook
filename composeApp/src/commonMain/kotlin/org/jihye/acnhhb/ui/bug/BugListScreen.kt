@@ -2,7 +2,7 @@ package org.jihye.acnhhb.ui.bug
 
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_bugs
-import acnhhandbook.composeapp.generated.resources.ic_bug_150
+import acnhhandbook.composeapp.generated.resources.ic_home_bug
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -51,7 +51,7 @@ fun BugListScreen(
         topBar = {
             ListScreenTopBar(
                 title = stringResource(Res.string.home_bugs),
-                icon = Res.drawable.ic_bug_150,
+                icon = Res.drawable.ic_home_bug,
                 onBackClick = onBack
             )
         }

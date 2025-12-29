@@ -2,7 +2,7 @@ package org.jihye.acnhhb.ui.sea
 
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_sea_creatures
-import acnhhandbook.composeapp.generated.resources.ic_sea_150
+import acnhhandbook.composeapp.generated.resources.ic_home_sea
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -50,7 +50,7 @@ fun SeaCreatureListScreen(
         topBar = {
             ListScreenTopBar(
                 title = stringResource(Res.string.home_sea_creatures),
-                icon = Res.drawable.ic_sea_150,
+                icon = Res.drawable.ic_home_sea,
                 onBackClick = onBack
             )
         }

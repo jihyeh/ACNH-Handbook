@@ -2,7 +2,7 @@ package org.jihye.acnhhb.ui.fish
 
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_fish
-import acnhhandbook.composeapp.generated.resources.ic_fish_150
+import acnhhandbook.composeapp.generated.resources.ic_home_fish
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -50,7 +50,7 @@ fun FishListScreen(
         topBar = {
             ListScreenTopBar(
                 title = stringResource(Res.string.home_fish),
-                icon = Res.drawable.ic_fish_150,
+                icon = Res.drawable.ic_home_fish,
                 onBackClick = onBack
             )
         }

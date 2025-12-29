@@ -2,7 +2,7 @@ package org.jihye.acnhhb.ui.fossil
 
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_fossils
-import acnhhandbook.composeapp.generated.resources.ic_fossil_150
+import acnhhandbook.composeapp.generated.resources.ic_home_fossil
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -50,7 +50,7 @@ fun FossilListScreen(
         topBar = {
             ListScreenTopBar(
                 title = stringResource(Res.string.home_fossils),
-                icon = Res.drawable.ic_fossil_150,
+                icon = Res.drawable.ic_home_fossil,
                 onBackClick = onBack
             )
         }
