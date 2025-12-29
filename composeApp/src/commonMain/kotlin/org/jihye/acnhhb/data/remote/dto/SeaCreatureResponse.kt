@@ -7,8 +7,11 @@ import kotlinx.serialization.Serializable
 data class SeaCreatureResponse(
     val number: Int,
     val name: String,
+    val url: String? = null,
     @SerialName("image_url")
     val imageUrl: String,
+    @SerialName("render_url")
+    val renderUrl: String? = null,
     @SerialName("shadow_size")
     val shadowSize: String,
     @SerialName("shadow_movement")

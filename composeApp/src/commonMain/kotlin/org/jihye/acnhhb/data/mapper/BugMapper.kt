@@ -7,8 +7,11 @@ fun BugResponse.toDomain(): Bug {
     return Bug(
         number = number,
         name = name,
+        url = url ?: "",
         imageUrl = imageUrl,
+        renderUrl = renderUrl ?: "",
         location = location,
+        weather = weather ?: "",
         rarity = rarity,
         sellNook = sellNook,
         sellFlick = sellFlick,

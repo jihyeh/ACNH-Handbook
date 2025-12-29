@@ -25,6 +25,8 @@ fun VillagerResponse.toDomain(): Villager {
         clothing = clothing,
         islander = islander,
         debut = debut,
+        prevPhrases = prevPhrases,
+        appearances = appearances,
         nhDetails = nhDetails?.toDomain()
     )
 }

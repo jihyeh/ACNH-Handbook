@@ -7,9 +7,13 @@ import kotlinx.serialization.Serializable
 data class BugResponse(
     val number: Int,
     val name: String,
+    val url: String? = null,
     @SerialName("image_url")
     val imageUrl: String,
+    @SerialName("render_url")
+    val renderUrl: String? = null,
     val location: String,
+    val weather: String? = null,
     val rarity: String,
     @SerialName("total_catch")
     val totalCatch: Int,

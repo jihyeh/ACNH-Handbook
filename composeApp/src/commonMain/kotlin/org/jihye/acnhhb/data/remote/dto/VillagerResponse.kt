@@ -29,6 +29,9 @@ data class VillagerResponse(
     val clothing: String? = null,
     val islander: Boolean? = null,
     val debut: String? = null,
+    @SerialName("prev_phrases")
+    val prevPhrases: List<String> = emptyList(),
+    val appearances: List<String> = emptyList(),
     @SerialName("nh_details")
     val nhDetails: NhDetails? = null,
 )

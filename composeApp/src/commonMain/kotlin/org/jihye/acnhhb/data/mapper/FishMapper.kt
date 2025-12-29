@@ -7,7 +7,9 @@ fun FishResponse.toDomain(): Fish {
     return Fish(
         number = number,
         name = name,
+        url = url ?: "",
         imageUrl = imageUrl,
+        renderUrl = renderUrl ?: "",
         location = location,
         shadowSize = shadowSize,
         rarity = rarity,

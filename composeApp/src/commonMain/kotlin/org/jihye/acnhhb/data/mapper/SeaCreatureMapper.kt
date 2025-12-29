@@ -7,7 +7,9 @@ fun SeaCreatureResponse.toDomain(): SeaCreature {
     return SeaCreature(
         number = number,
         name = name,
+        url = url ?: "",
         imageUrl = imageUrl,
+        renderUrl = renderUrl ?: "",
         shadowSize = shadowSize,
         shadowMovement = shadowMovement,
         rarity = rarity,

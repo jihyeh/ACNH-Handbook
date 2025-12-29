@@ -3,7 +3,9 @@ package org.jihye.acnhhb.domain.model
 data class Fish(
     val number: Int,
     val name: String,
+    val url: String,
     val imageUrl: String,
+    val renderUrl: String,
     val location: String,
     val shadowSize: String,
     val rarity: String,

@@ -3,8 +3,11 @@ package org.jihye.acnhhb.domain.model
 data class Bug(
     val number: Int,
     val name: String,
+    val url: String,
     val imageUrl: String,
+    val renderUrl: String,
     val location: String,
+    val weather: String,
     val rarity: String,
     val sellNook: Int,
     val sellFlick: Int,
