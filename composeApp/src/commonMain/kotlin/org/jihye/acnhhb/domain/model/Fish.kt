@@ -9,7 +9,6 @@ data class Fish(
     val rarity: String,
     val sellNook: Int,
     val sellCj: Int,
-    val time: String,
     val northMonths: String,
     val southMonths: String,
     val catchphrases: List<String>,

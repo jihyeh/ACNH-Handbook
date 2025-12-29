@@ -13,7 +13,6 @@ fun FishResponse.toDomain(): Fish {
         rarity = rarity,
         sellNook = sellNook,
         sellCj = sellCj,
-        time = time,
         northMonths = north.months,
         southMonths = south.months,
         catchphrases = catchphrases

@@ -23,7 +23,6 @@ data class FishResponse(
     val tankWidth: Float,
     @SerialName("tank_length")
     val tankLength: Float,
-    val time: String,
     val north: Availability,
     val south: Availability,
     val catchphrases: List<String>,
