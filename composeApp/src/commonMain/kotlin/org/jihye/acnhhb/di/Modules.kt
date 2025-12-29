@@ -25,17 +25,21 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-val appModule = module {
+val dataModule = module {
     singleOf(::NookipediaNetwork)
     singleOf(::RemoteDataSource)
+    single { createDataStore() }
+}
+
+val repositoryModule = module {
     singleOf(::VillagerRepositoryImpl) { bind<VillagerRepository>() }
     singleOf(::FlowerBreedingRepositoryImpl) { bind<FlowerBreedingRepository>() }
     singleOf(::SettingsRepositoryImpl) { bind<SettingsRepository>() }
     singleOf(::FishRepositoryImpl) { bind<FishRepository>() }
     singleOf(::BugRepositoryImpl) { bind<BugRepository>() }
+}
 
-    single { createDataStore() }
-
+val viewModelModule = module {
     viewModelOf(::FlowerBreedingViewModel)
     viewModelOf(::SettingsViewModel)
     viewModelOf(::VillagerViewModel)
@@ -43,7 +47,9 @@ val appModule = module {
     viewModelOf(::BugViewModel)
 }
 
+val appModules = listOf(dataModule, repositoryModule, viewModelModule)
+
 fun startDependencyInjection(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
-    modules(appModule)
+    modules(appModules)
 }
