@@ -20,6 +20,7 @@ import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
 import org.jihye.acnhhb.ui.fossil.FossilListScreen
 import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
+import org.jihye.acnhhb.ui.item.ItemListScreen
 import org.jihye.acnhhb.ui.sea.SeaCreatureListScreen
 import org.jihye.acnhhb.ui.villager.VillagerListScreen
 
@@ -96,6 +97,12 @@ fun NavigationRoot(
 
                         Category.FOSSILS.name -> {
                             FossilListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        Category.ITEMS.name -> {
+                            ItemListScreen {
                                 backStack.removeLastOrNull()
                             }
                         }
