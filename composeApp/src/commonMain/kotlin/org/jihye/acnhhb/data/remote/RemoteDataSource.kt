@@ -2,6 +2,7 @@ package org.jihye.acnhhb.data.remote
 
 import org.jihye.acnhhb.data.remote.dto.BugResponse
 import org.jihye.acnhhb.data.remote.dto.FishResponse
+import org.jihye.acnhhb.data.remote.dto.SeaCreatureResponse
 import org.jihye.acnhhb.data.remote.dto.VillagerResponse
 
 class RemoteDataSource(
@@ -46,5 +47,18 @@ class RemoteDataSource(
             "thumbsize" to thumbnailSize?.toString(),
         )
         return client.get("/nh/bugs", params)
+    }
+
+    suspend fun fetchSeaCreatures(
+        month: String?,
+        isExcludeDetails: String?,
+        thumbnailSize: Int?,
+    ): List<SeaCreatureResponse> {
+        val params = mapOf(
+            "month" to month,
+            "excludedetails" to isExcludeDetails,
+            "thumbsize" to thumbnailSize?.toString(),
+        )
+        return client.get("/nh/sea", params)
     }
 }

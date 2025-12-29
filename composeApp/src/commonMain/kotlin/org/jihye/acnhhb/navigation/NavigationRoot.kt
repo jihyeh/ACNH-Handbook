@@ -18,6 +18,7 @@ import org.jihye.acnhhb.ui.fish.FishListScreen
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
 import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
+import org.jihye.acnhhb.ui.sea.SeaCreatureListScreen
 import org.jihye.acnhhb.ui.villager.VillagerListScreen
 
 @Composable
@@ -75,6 +76,12 @@ fun NavigationRoot(
 
                         Category.BUGS.name -> {
                             BugListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        Category.SEA_CREATURES.name -> {
+                            SeaCreatureListScreen {
                                 backStack.removeLastOrNull()
                             }
                         }
