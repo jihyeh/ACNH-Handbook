@@ -4,25 +4,23 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FishResponse(
+data class BugResponse(
     val number: Int,
     val name: String,
     @SerialName("image_url")
     val imageUrl: String,
     val location: String,
-    @SerialName("shadow_size")
-    val shadowSize: String,
     val rarity: String,
     @SerialName("total_catch")
     val totalCatch: Int,
     @SerialName("sell_nook")
     val sellNook: Int,
-    @SerialName("sell_cj")
-    val sellCj: Int,
+    @SerialName("sell_flick")
+    val sellFlick: Int,
     @SerialName("tank_width")
-    val tankWidth: Float,
+    val tankWidth: Float? = null,
     @SerialName("tank_length")
-    val tankLength: Float,
+    val tankLength: Float? = null,
     val north: Availability,
     val south: Availability,
     val catchphrases: List<String>,
