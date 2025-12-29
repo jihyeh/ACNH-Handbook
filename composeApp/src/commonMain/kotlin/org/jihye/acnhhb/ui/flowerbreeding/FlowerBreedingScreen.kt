@@ -22,26 +22,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,6 +45,7 @@ import org.jihye.acnhhb.domain.model.Flower
 import org.jihye.acnhhb.domain.model.FlowerTypeData
 import org.jihye.acnhhb.domain.model.SpecialBreeding
 import org.jihye.acnhhb.ui.components.ErrorContent
+import org.jihye.acnhhb.ui.components.ListScreenTopBar
 import org.jihye.acnhhb.ui.components.LoadingContent
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -66,7 +59,11 @@ fun FlowerBreedingScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(onBackClick = onBack)
+            ListScreenTopBar(
+                title = stringResource(Res.string.home_flower_breed),
+                icon = Res.drawable.ic_flower_breed_150,
+                onBackClick = onBack
+            )
         },
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = WindowInsets.statusBars,
@@ -473,46 +470,4 @@ private fun SpecialFlowerRowItem(
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun TopAppBar(
-    onBackClick: () -> Unit,
-) {
-    TopAppBar(
-        title = {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    painter = painterResource(Res.drawable.ic_flower_breed_150),
-                    contentDescription = stringResource(Res.string.home_flower_breed),
-                    tint = Color.Unspecified,
-                    modifier = Modifier.wrapContentSize(),
-                )
-                Text(
-                    text = stringResource(Res.string.home_flower_breed),
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-        },
-        navigationIcon = {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                    contentDescription = null,
-                )
-            }
-        },
-        colors =
-            TopAppBarDefaults.topAppBarColors(
-                containerColor = MaterialTheme.colorScheme.surface,
-                titleContentColor = MaterialTheme.colorScheme.onSurface,
-                navigationIconContentColor = MaterialTheme.colorScheme.onSurface
-            ),
-    )
 }
