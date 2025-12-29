@@ -3,9 +3,11 @@ package org.jihye.acnhhb.di
 import org.jihye.acnhhb.data.createDataStore
 import org.jihye.acnhhb.data.remote.NookipediaNetwork
 import org.jihye.acnhhb.data.remote.RemoteDataSource
+import org.jihye.acnhhb.data.repository.FishRepositoryImpl
 import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
 import org.jihye.acnhhb.data.repository.VillagerRepositoryImpl
+import org.jihye.acnhhb.domain.repository.FishRepository
 import org.jihye.acnhhb.domain.repository.FlowerBreedingRepository
 import org.jihye.acnhhb.domain.repository.SettingsRepository
 import org.jihye.acnhhb.domain.repository.VillagerRepository
@@ -25,6 +27,7 @@ val appModule = module {
     singleOf(::VillagerRepositoryImpl) { bind<VillagerRepository>() }
     singleOf(::FlowerBreedingRepositoryImpl) { bind<FlowerBreedingRepository>() }
     singleOf(::SettingsRepositoryImpl) { bind<SettingsRepository>() }
+    singleOf(::FishRepositoryImpl) { bind<FishRepository>() }
 
     single { createDataStore() }
 
