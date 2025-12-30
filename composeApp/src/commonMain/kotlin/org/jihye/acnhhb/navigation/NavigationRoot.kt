@@ -15,6 +15,7 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import org.jihye.acnhhb.ui.art.ArtListScreen
 import org.jihye.acnhhb.ui.bug.BugListScreen
+import org.jihye.acnhhb.ui.clothing.ClothingListScreen
 import org.jihye.acnhhb.ui.fish.FishListScreen
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
 import org.jihye.acnhhb.ui.fossil.FossilListScreen
@@ -117,6 +118,12 @@ fun NavigationRoot(
 
                         Category.TOOLS.name -> {
                             ToolListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        Category.CLOTHING.name -> {
+                            ClothingListScreen {
                                 backStack.removeLastOrNull()
                             }
                         }

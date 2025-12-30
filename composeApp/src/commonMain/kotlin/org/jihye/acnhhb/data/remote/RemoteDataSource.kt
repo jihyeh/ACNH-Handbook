@@ -2,6 +2,7 @@ package org.jihye.acnhhb.data.remote
 
 import org.jihye.acnhhb.data.remote.dto.ArtResponse
 import org.jihye.acnhhb.data.remote.dto.BugResponse
+import org.jihye.acnhhb.data.remote.dto.ClothingResponse
 import org.jihye.acnhhb.data.remote.dto.FishResponse
 import org.jihye.acnhhb.data.remote.dto.FossilResponse
 import org.jihye.acnhhb.data.remote.dto.GyroidResponse
@@ -118,4 +119,20 @@ class RemoteDataSource(
         return client.get("/nh/tools", params)
     }
 
+    suspend fun fetchClothing(
+        category: String? = null,
+        color: List<String>? = null,
+        style: List<String>? = null,
+        labelTheme: String? = null,
+        isExcludeDetails: String? = null,
+    ): List<ClothingResponse> {
+        val params = mapOf(
+            "category" to category,
+            "color" to color?.joinToString(","),
+            "style" to style?.joinToString(","),
+            "labeltheme" to labelTheme,
+            "excludedetails" to isExcludeDetails,
+        )
+        return client.get("/nh/clothing", params)
+    }
 }
