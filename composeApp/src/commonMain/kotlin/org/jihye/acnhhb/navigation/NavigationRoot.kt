@@ -23,6 +23,7 @@ import org.jihye.acnhhb.ui.furniture.FurnitureListScreen
 import org.jihye.acnhhb.ui.gyroid.GyroidListScreen
 import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
+import org.jihye.acnhhb.ui.interior.InteriorListScreen
 import org.jihye.acnhhb.ui.item.ItemListScreen
 import org.jihye.acnhhb.ui.sea.SeaCreatureListScreen
 import org.jihye.acnhhb.ui.tool.ToolListScreen
@@ -131,6 +132,12 @@ fun NavigationRoot(
 
                         Category.FURNITURE.name -> {
                             FurnitureListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        Category.INTERIOR.name -> {
+                            InteriorListScreen {
                                 backStack.removeLastOrNull()
                             }
                         }

@@ -11,6 +11,7 @@ import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
 import org.jihye.acnhhb.data.repository.FossilRepositoryImpl
 import org.jihye.acnhhb.data.repository.FurnitureRepositoryImpl
 import org.jihye.acnhhb.data.repository.GyroidRepositoryImpl
+import org.jihye.acnhhb.data.repository.InteriorRepositoryImpl
 import org.jihye.acnhhb.data.repository.ItemRepositoryImpl
 import org.jihye.acnhhb.data.repository.SeaCreatureRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
@@ -24,6 +25,7 @@ import org.jihye.acnhhb.domain.repository.FlowerBreedingRepository
 import org.jihye.acnhhb.domain.repository.FossilRepository
 import org.jihye.acnhhb.domain.repository.FurnitureRepository
 import org.jihye.acnhhb.domain.repository.GyroidRepository
+import org.jihye.acnhhb.domain.repository.InteriorRepository
 import org.jihye.acnhhb.domain.repository.ItemRepository
 import org.jihye.acnhhb.domain.repository.SeaCreatureRepository
 import org.jihye.acnhhb.domain.repository.SettingsRepository
@@ -37,6 +39,7 @@ import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingViewModel
 import org.jihye.acnhhb.ui.fossil.FossilViewModel
 import org.jihye.acnhhb.ui.furniture.FurnitureViewModel
 import org.jihye.acnhhb.ui.gyroid.GyroidViewModel
+import org.jihye.acnhhb.ui.interior.InteriorViewModel
 import org.jihye.acnhhb.ui.item.ItemViewModel
 import org.jihye.acnhhb.ui.sea.SeaCreatureViewModel
 import org.jihye.acnhhb.ui.settings.SettingsViewModel
@@ -69,6 +72,7 @@ val repositoryModule = module {
     singleOf(::ToolRepositoryImpl) { bind<ToolRepository>() }
     singleOf(::ClothingRepositoryImpl) { bind<ClothingRepository>() }
     singleOf(::FurnitureRepositoryImpl) { bind<FurnitureRepository>() }
+    singleOf(::InteriorRepositoryImpl) { bind<InteriorRepository>() }
 }
 
 val viewModelModule = module {
@@ -85,6 +89,7 @@ val viewModelModule = module {
     viewModelOf(::ToolViewModel)
     viewModelOf(::ClothingViewModel)
     viewModelOf(::FurnitureViewModel)
+    viewModelOf(::InteriorViewModel)
 }
 
 val appModules = listOf(dataModule, repositoryModule, viewModelModule)
