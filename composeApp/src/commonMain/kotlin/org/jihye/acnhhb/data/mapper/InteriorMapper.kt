@@ -19,8 +19,8 @@ fun InteriorResponse.toDomain(): Interior {
         versionAdded = versionAdded ?: "",
         unlocked = unlocked ?: false,
         notes = notes ?: "",
-        gridWidth = gridWidth ?: 0f,
-        gridLength = gridLength ?: 0f,
+        gridWidth = gridWidth?.content?.toFloatOrNull() ?: 0f,
+        gridLength = gridLength?.content?.toFloatOrNull() ?: 0f,
         colors = colors ?: emptyList(),
         availability = availability?.map {
             Interior.Availability(from = it.from ?: "", note = it.note ?: "")

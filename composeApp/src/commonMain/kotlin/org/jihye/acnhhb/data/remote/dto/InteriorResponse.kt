@@ -2,6 +2,7 @@ package org.jihye.acnhhb.data.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonPrimitive
 
 @Serializable
 data class InteriorResponse(
@@ -26,9 +27,9 @@ data class InteriorResponse(
     val unlocked: Boolean? = null,
     val notes: String? = null,
     @SerialName("grid_width")
-    val gridWidth: Float? = null,
+    val gridWidth: JsonPrimitive? = null,
     @SerialName("grid_length")
-    val gridLength: Float? = null,
+    val gridLength: JsonPrimitive? = null,
     val colors: List<String>? = null,
     val availability: List<Availability>? = null,
     val buy: List<Buy>? = null,
