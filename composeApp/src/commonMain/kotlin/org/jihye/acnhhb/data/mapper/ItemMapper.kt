@@ -24,17 +24,11 @@ fun ItemResponse.toDomain(): Item {
         versionAdded = versionAdded ?: "",
         unlocked = unlocked ?: false,
         notes = notes ?: "",
-        availability = itemAvailability?.map {
-            DomainAvailability(
-                from = it.from ?: "",
-                note = it.note ?: ""
-            )
+        availability = availability?.map {
+            DomainAvailability(from = it.from ?: "", note = it.note ?: "")
         } ?: emptyList(),
         buy = buy?.map {
-            DomainBuy(
-                price = it.price ?: 0,
-                currency = it.currency ?: ""
-            )
+            DomainBuy(price = it.price ?: 0, currency = it.currency ?: "")
         } ?: emptyList(),
     )
 }

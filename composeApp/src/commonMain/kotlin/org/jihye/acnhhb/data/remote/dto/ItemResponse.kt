@@ -32,18 +32,18 @@ data class ItemResponse(
     val versionAdded: String? = null,
     val unlocked: Boolean? = null,
     val notes: String? = null,
-    val itemAvailability: List<ItemAvailability>? = null,
+    val availability: List<Availability>? = null,
     val buy: List<Buy>? = null,
-)
+) {
+    @Serializable
+    data class Availability(
+        val from: String? = null,
+        val note: String? = null,
+    )
 
-@Serializable
-data class ItemAvailability(
-    val from: String? = null,
-    val note: String? = null,
-)
-
-@Serializable
-data class Buy(
-    val price: Int? = null,
-    val currency: String? = null,
-)
+    @Serializable
+    data class Buy(
+        val price: Int? = null,
+        val currency: String? = null,
+    )
+}
