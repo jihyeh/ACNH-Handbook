@@ -39,13 +39,3 @@ data class Item(
             else -> ItemCategory.OTHER
         }
 }
-
-data class Availability(
-    val from: String,
-    val note: String,
-)
-
-data class Buy(
-    val price: Int,
-    val currency: String,
-)
