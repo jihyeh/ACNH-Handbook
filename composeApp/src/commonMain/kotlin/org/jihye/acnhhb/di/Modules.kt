@@ -12,6 +12,7 @@ import org.jihye.acnhhb.data.repository.GyroidRepositoryImpl
 import org.jihye.acnhhb.data.repository.ItemRepositoryImpl
 import org.jihye.acnhhb.data.repository.SeaCreatureRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
+import org.jihye.acnhhb.data.repository.ToolRepositoryImpl
 import org.jihye.acnhhb.data.repository.VillagerRepositoryImpl
 import org.jihye.acnhhb.domain.repository.ArtRepository
 import org.jihye.acnhhb.domain.repository.BugRepository
@@ -22,6 +23,7 @@ import org.jihye.acnhhb.domain.repository.GyroidRepository
 import org.jihye.acnhhb.domain.repository.ItemRepository
 import org.jihye.acnhhb.domain.repository.SeaCreatureRepository
 import org.jihye.acnhhb.domain.repository.SettingsRepository
+import org.jihye.acnhhb.domain.repository.ToolRepository
 import org.jihye.acnhhb.domain.repository.VillagerRepository
 import org.jihye.acnhhb.ui.art.ArtViewModel
 import org.jihye.acnhhb.ui.bug.BugViewModel
@@ -32,6 +34,7 @@ import org.jihye.acnhhb.ui.gyroid.GyroidViewModel
 import org.jihye.acnhhb.ui.item.ItemViewModel
 import org.jihye.acnhhb.ui.sea.SeaCreatureViewModel
 import org.jihye.acnhhb.ui.settings.SettingsViewModel
+import org.jihye.acnhhb.ui.tool.ToolViewModel
 import org.jihye.acnhhb.ui.villager.VillagerViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.bind
@@ -57,6 +60,7 @@ val repositoryModule = module {
     singleOf(::FossilRepositoryImpl) { bind<FossilRepository>() }
     singleOf(::ItemRepositoryImpl) { bind<ItemRepository>() }
     singleOf(::GyroidRepositoryImpl) { bind<GyroidRepository>() }
+    singleOf(::ToolRepositoryImpl) { bind<ToolRepository>() }
 }
 
 val viewModelModule = module {
@@ -70,6 +74,7 @@ val viewModelModule = module {
     viewModelOf(::FossilViewModel)
     viewModelOf(::ItemViewModel)
     viewModelOf(::GyroidViewModel)
+    viewModelOf(::ToolViewModel)
 }
 
 val appModules = listOf(dataModule, repositoryModule, viewModelModule)

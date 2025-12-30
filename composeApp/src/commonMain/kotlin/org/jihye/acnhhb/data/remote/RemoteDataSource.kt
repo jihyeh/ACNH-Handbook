@@ -7,6 +7,7 @@ import org.jihye.acnhhb.data.remote.dto.FossilResponse
 import org.jihye.acnhhb.data.remote.dto.GyroidResponse
 import org.jihye.acnhhb.data.remote.dto.ItemResponse
 import org.jihye.acnhhb.data.remote.dto.SeaCreatureResponse
+import org.jihye.acnhhb.data.remote.dto.ToolResponse
 import org.jihye.acnhhb.data.remote.dto.VillagerResponse
 
 class RemoteDataSource(
@@ -106,6 +107,15 @@ class RemoteDataSource(
             "excludedetails" to isExcludeDetails,
         )
         return client.get("/nh/gyroids", params)
+    }
+
+    suspend fun fetchTools(
+        isExcludeDetails: String?,
+    ): List<ToolResponse> {
+        val params = mapOf(
+            "excludedetails" to isExcludeDetails,
+        )
+        return client.get("/nh/tools", params)
     }
 
 }
