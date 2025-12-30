@@ -19,6 +19,7 @@ import org.jihye.acnhhb.ui.clothing.ClothingListScreen
 import org.jihye.acnhhb.ui.fish.FishListScreen
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingScreen
 import org.jihye.acnhhb.ui.fossil.FossilListScreen
+import org.jihye.acnhhb.ui.furniture.FurnitureListScreen
 import org.jihye.acnhhb.ui.gyroid.GyroidListScreen
 import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
@@ -124,6 +125,12 @@ fun NavigationRoot(
 
                         Category.CLOTHING.name -> {
                             ClothingListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        Category.FURNITURE.name -> {
+                            FurnitureListScreen {
                                 backStack.removeLastOrNull()
                             }
                         }

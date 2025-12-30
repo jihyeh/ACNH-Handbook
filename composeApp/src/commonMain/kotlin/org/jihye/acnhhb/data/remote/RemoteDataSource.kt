@@ -5,6 +5,7 @@ import org.jihye.acnhhb.data.remote.dto.BugResponse
 import org.jihye.acnhhb.data.remote.dto.ClothingResponse
 import org.jihye.acnhhb.data.remote.dto.FishResponse
 import org.jihye.acnhhb.data.remote.dto.FossilResponse
+import org.jihye.acnhhb.data.remote.dto.FurnitureResponse
 import org.jihye.acnhhb.data.remote.dto.GyroidResponse
 import org.jihye.acnhhb.data.remote.dto.ItemResponse
 import org.jihye.acnhhb.data.remote.dto.SeaCreatureResponse
@@ -134,5 +135,18 @@ class RemoteDataSource(
             "excludedetails" to isExcludeDetails,
         )
         return client.get("/nh/clothing", params)
+    }
+
+    suspend fun fetchFurniture(
+        category: String? = null,
+        color: List<String>? = null,
+        isExcludeDetails: String? = null,
+    ): List<FurnitureResponse> {
+        val params = mapOf(
+            "category" to category,
+            "color" to color?.joinToString(","),
+            "excludedetails" to isExcludeDetails,
+        )
+        return client.get("/nh/furniture", params)
     }
 }
