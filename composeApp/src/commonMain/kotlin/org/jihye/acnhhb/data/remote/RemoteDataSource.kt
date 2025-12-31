@@ -9,6 +9,7 @@ import org.jihye.acnhhb.data.remote.dto.FurnitureResponse
 import org.jihye.acnhhb.data.remote.dto.GyroidResponse
 import org.jihye.acnhhb.data.remote.dto.InteriorResponse
 import org.jihye.acnhhb.data.remote.dto.ItemResponse
+import org.jihye.acnhhb.data.remote.dto.PhotoResponse
 import org.jihye.acnhhb.data.remote.dto.RecipeResponse
 import org.jihye.acnhhb.data.remote.dto.SeaCreatureResponse
 import org.jihye.acnhhb.data.remote.dto.ToolResponse
@@ -176,5 +177,14 @@ class RemoteDataSource(
             "thumbsize" to thumbnailSize?.toString(),
         )
         return client.get("/nh/recipes", params)
+    }
+
+    suspend fun fetchPhotos(
+        isExcludeDetails: String? = null,
+    ): List<PhotoResponse> {
+        val params = mapOf(
+            "excludedetails" to isExcludeDetails,
+        )
+        return client.get("/nh/photos", params)
     }
 }
