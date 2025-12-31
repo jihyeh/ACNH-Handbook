@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.buildConfig)
+    alias(libs.plugins.aboutLibraries)
 }
 
 kotlin {
@@ -75,6 +76,10 @@ kotlin {
 
             // DataStore
             implementation(libs.androidx.datastore.preferences)
+
+            // AboutLibraries
+            implementation(libs.aboutlibraries.core)
+            implementation(libs.aboutLibraries.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

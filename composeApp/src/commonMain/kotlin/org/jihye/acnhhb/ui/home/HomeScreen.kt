@@ -45,13 +45,18 @@ import org.jihye.acnhhb.ui.settings.SettingsDialog
 fun HomeScreen(
     modifier: Modifier = Modifier,
     onClick: (item: Category) -> Unit = {},
+    onLicenseClick: () -> Unit = {},
 ) {
     var showSettings by remember { mutableStateOf(false) }
 
     if (showSettings) {
-        SettingsDialog {
-            showSettings = false
-        }
+        SettingsDialog(
+            onDismissRequest = { showSettings = false },
+            onLicenseClick = {
+                showSettings = false
+                onLicenseClick()
+            }
+        )
     }
 
     Scaffold(

@@ -17,6 +17,9 @@ sealed interface Route : NavKey {
 
     @Serializable
     data object FlowerBreeding : Route
+
+    @Serializable
+    data object License : Route
 }
 
 /**
@@ -28,6 +31,7 @@ val routeSerializersModule = SerializersModule {
         subclass(Route.Home::class)
         subclass(Route.List::class)
         subclass(Route.FlowerBreeding::class)
+        subclass(Route.License::class)
     }
 }
 

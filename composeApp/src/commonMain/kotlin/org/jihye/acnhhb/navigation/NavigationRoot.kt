@@ -29,6 +29,7 @@ import org.jihye.acnhhb.ui.item.ItemListScreen
 import org.jihye.acnhhb.ui.photo.PhotoListScreen
 import org.jihye.acnhhb.ui.recipe.RecipeListScreen
 import org.jihye.acnhhb.ui.sea.SeaCreatureListScreen
+import org.jihye.acnhhb.ui.settings.LicenseScreen
 import org.jihye.acnhhb.ui.tool.ToolListScreen
 import org.jihye.acnhhb.ui.villager.VillagerListScreen
 
@@ -52,17 +53,26 @@ fun NavigationRoot(
         entryProvider =
             entryProvider {
                 entry<Route.Home> {
-                    HomeScreen { item ->
-                        when (item) {
-                            Category.FLOWER_BREED -> {
-                                backStack.add(Route.FlowerBreeding)
-                            }
+                    HomeScreen(
+                        onClick = { item ->
+                            when (item) {
+                                Category.FLOWER_BREED -> {
+                                    backStack.add(Route.FlowerBreeding)
+                                }
 
-                            else -> {
-                                backStack.add(Route.List(item.name))
+                                else -> {
+                                    backStack.add(Route.List(item.name))
+                                }
                             }
+                        },
+                        onLicenseClick = {
+                            backStack.add(Route.License)
                         }
-                    }
+                    )
+                }
+
+                entry<Route.License> {
+                    LicenseScreen { backStack.removeLastOrNull() }
                 }
 
                 entry<Route.FlowerBreeding> {

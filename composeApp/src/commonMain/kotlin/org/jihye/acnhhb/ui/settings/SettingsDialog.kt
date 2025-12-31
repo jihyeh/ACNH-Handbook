@@ -1,6 +1,7 @@
 package org.jihye.acnhhb.ui.settings
 
 import acnhhandbook.composeapp.generated.resources.Res
+import acnhhandbook.composeapp.generated.resources.oss_license
 import acnhhandbook.composeapp.generated.resources.settings_close
 import acnhhandbook.composeapp.generated.resources.settings_hemisphere
 import acnhhandbook.composeapp.generated.resources.settings_hemisphere_north
@@ -11,6 +12,7 @@ import acnhhandbook.composeapp.generated.resources.settings_theme_light
 import acnhhandbook.composeapp.generated.resources.settings_title
 import acnhhandbook.composeapp.generated.resources.settings_version
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.jetbrains.compose.resources.stringResource
@@ -38,6 +41,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun SettingsDialog(
     viewModel: SettingsViewModel = koinViewModel(),
     onDismissRequest: () -> Unit = {},
+    onLicenseClick: () -> Unit = {},
 ) {
     val isDarkTheme by viewModel.isDarkTheme.collectAsStateWithLifecycle()
     val isNorth by viewModel.isNorth.collectAsStateWithLifecycle()
@@ -57,7 +61,8 @@ fun SettingsDialog(
                 isNorth = isNorth,
                 appVersion = appVersion,
                 onThemeChange = { viewModel.updateTheme(it) },
-                onHemisphereChange = { viewModel.updateHemisphere(it) }
+                onHemisphereChange = { viewModel.updateHemisphere(it) },
+                onLicenseClick = onLicenseClick,
             )
         },
         confirmButton = {
@@ -78,6 +83,7 @@ private fun SettingsContent(
     appVersion: String,
     onThemeChange: (Boolean) -> Unit = {},
     onHemisphereChange: (Boolean) -> Unit = {},
+    onLicenseClick: () -> Unit = {},
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -130,6 +136,22 @@ private fun SettingsContent(
                 fontWeight = FontWeight.Bold
             )
             Text(text = "v$appVersion", style = MaterialTheme.typography.titleMedium)
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // License
+        TextButton(
+            onClick = onLicenseClick,
+            modifier = Modifier.fillMaxWidth().height(48.dp),
+        ) {
+            Text(
+                text = stringResource(Res.string.oss_license),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface,
+                textAlign = TextAlign.Left,
+            )
         }
     }
 }
