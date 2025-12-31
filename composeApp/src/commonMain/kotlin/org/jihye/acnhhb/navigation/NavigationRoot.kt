@@ -25,6 +25,7 @@ import org.jihye.acnhhb.ui.home.Category
 import org.jihye.acnhhb.ui.home.HomeScreen
 import org.jihye.acnhhb.ui.interior.InteriorListScreen
 import org.jihye.acnhhb.ui.item.ItemListScreen
+import org.jihye.acnhhb.ui.recipe.RecipeListScreen
 import org.jihye.acnhhb.ui.sea.SeaCreatureListScreen
 import org.jihye.acnhhb.ui.tool.ToolListScreen
 import org.jihye.acnhhb.ui.villager.VillagerListScreen
@@ -138,6 +139,12 @@ fun NavigationRoot(
 
                         Category.INTERIOR.name -> {
                             InteriorListScreen {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+
+                        Category.RECIPES.name -> {
+                            RecipeListScreen {
                                 backStack.removeLastOrNull()
                             }
                         }

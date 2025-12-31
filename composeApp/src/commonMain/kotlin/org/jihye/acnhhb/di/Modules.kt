@@ -13,6 +13,7 @@ import org.jihye.acnhhb.data.repository.FurnitureRepositoryImpl
 import org.jihye.acnhhb.data.repository.GyroidRepositoryImpl
 import org.jihye.acnhhb.data.repository.InteriorRepositoryImpl
 import org.jihye.acnhhb.data.repository.ItemRepositoryImpl
+import org.jihye.acnhhb.data.repository.RecipeRepositoryImpl
 import org.jihye.acnhhb.data.repository.SeaCreatureRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
 import org.jihye.acnhhb.data.repository.ToolRepositoryImpl
@@ -27,6 +28,7 @@ import org.jihye.acnhhb.domain.repository.FurnitureRepository
 import org.jihye.acnhhb.domain.repository.GyroidRepository
 import org.jihye.acnhhb.domain.repository.InteriorRepository
 import org.jihye.acnhhb.domain.repository.ItemRepository
+import org.jihye.acnhhb.domain.repository.RecipeRepository
 import org.jihye.acnhhb.domain.repository.SeaCreatureRepository
 import org.jihye.acnhhb.domain.repository.SettingsRepository
 import org.jihye.acnhhb.domain.repository.ToolRepository
@@ -41,6 +43,7 @@ import org.jihye.acnhhb.ui.furniture.FurnitureViewModel
 import org.jihye.acnhhb.ui.gyroid.GyroidViewModel
 import org.jihye.acnhhb.ui.interior.InteriorViewModel
 import org.jihye.acnhhb.ui.item.ItemViewModel
+import org.jihye.acnhhb.ui.recipe.RecipeViewModel
 import org.jihye.acnhhb.ui.sea.SeaCreatureViewModel
 import org.jihye.acnhhb.ui.settings.SettingsViewModel
 import org.jihye.acnhhb.ui.tool.ToolViewModel
@@ -73,6 +76,7 @@ val repositoryModule = module {
     singleOf(::ClothingRepositoryImpl) { bind<ClothingRepository>() }
     singleOf(::FurnitureRepositoryImpl) { bind<FurnitureRepository>() }
     singleOf(::InteriorRepositoryImpl) { bind<InteriorRepository>() }
+    singleOf(::RecipeRepositoryImpl) { bind<RecipeRepository>() }
 }
 
 val viewModelModule = module {
@@ -90,6 +94,7 @@ val viewModelModule = module {
     viewModelOf(::ClothingViewModel)
     viewModelOf(::FurnitureViewModel)
     viewModelOf(::InteriorViewModel)
+    viewModelOf(::RecipeViewModel)
 }
 
 val appModules = listOf(dataModule, repositoryModule, viewModelModule)
