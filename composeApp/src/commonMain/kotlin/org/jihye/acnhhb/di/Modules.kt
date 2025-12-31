@@ -6,6 +6,7 @@ import org.jihye.acnhhb.data.remote.RemoteDataSource
 import org.jihye.acnhhb.data.repository.ArtRepositoryImpl
 import org.jihye.acnhhb.data.repository.BugRepositoryImpl
 import org.jihye.acnhhb.data.repository.ClothingRepositoryImpl
+import org.jihye.acnhhb.data.repository.EventRepositoryImpl
 import org.jihye.acnhhb.data.repository.FishRepositoryImpl
 import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
 import org.jihye.acnhhb.data.repository.FossilRepositoryImpl
@@ -22,6 +23,7 @@ import org.jihye.acnhhb.data.repository.VillagerRepositoryImpl
 import org.jihye.acnhhb.domain.repository.ArtRepository
 import org.jihye.acnhhb.domain.repository.BugRepository
 import org.jihye.acnhhb.domain.repository.ClothingRepository
+import org.jihye.acnhhb.domain.repository.EventRepository
 import org.jihye.acnhhb.domain.repository.FishRepository
 import org.jihye.acnhhb.domain.repository.FlowerBreedingRepository
 import org.jihye.acnhhb.domain.repository.FossilRepository
@@ -38,6 +40,7 @@ import org.jihye.acnhhb.domain.repository.VillagerRepository
 import org.jihye.acnhhb.ui.art.ArtViewModel
 import org.jihye.acnhhb.ui.bug.BugViewModel
 import org.jihye.acnhhb.ui.clothing.ClothingViewModel
+import org.jihye.acnhhb.ui.event.EventViewModel
 import org.jihye.acnhhb.ui.fish.FishViewModel
 import org.jihye.acnhhb.ui.flowerbreeding.FlowerBreedingViewModel
 import org.jihye.acnhhb.ui.fossil.FossilViewModel
@@ -81,6 +84,7 @@ val repositoryModule = module {
     singleOf(::InteriorRepositoryImpl) { bind<InteriorRepository>() }
     singleOf(::PhotoRepositoryImpl) { bind<PhotoRepository>() }
     singleOf(::RecipeRepositoryImpl) { bind<RecipeRepository>() }
+    singleOf(::EventRepositoryImpl) { bind<EventRepository>() }
 }
 
 val viewModelModule = module {
@@ -100,6 +104,7 @@ val viewModelModule = module {
     viewModelOf(::InteriorViewModel)
     viewModelOf(::PhotoViewModel)
     viewModelOf(::RecipeViewModel)
+    viewModelOf(::EventViewModel)
 }
 
 val appModules = listOf(dataModule, repositoryModule, viewModelModule)

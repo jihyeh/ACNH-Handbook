@@ -3,6 +3,7 @@ package org.jihye.acnhhb.data.remote
 import org.jihye.acnhhb.data.remote.dto.ArtResponse
 import org.jihye.acnhhb.data.remote.dto.BugResponse
 import org.jihye.acnhhb.data.remote.dto.ClothingResponse
+import org.jihye.acnhhb.data.remote.dto.EventResponse
 import org.jihye.acnhhb.data.remote.dto.FishResponse
 import org.jihye.acnhhb.data.remote.dto.FossilResponse
 import org.jihye.acnhhb.data.remote.dto.FurnitureResponse
@@ -186,5 +187,18 @@ class RemoteDataSource(
             "excludedetails" to isExcludeDetails,
         )
         return client.get("/nh/photos", params)
+    }
+
+    suspend fun fetchEvents(
+        year: String? = null,
+        month: String? = null,
+        day: Int? = null,
+    ): List<EventResponse> {
+        val params = mapOf(
+            "year" to year,
+            "month" to month,
+            "day" to day?.toString(),
+        )
+        return client.get("/nh/events", params)
     }
 }
