@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
 import org.jihye.acnhhb.domain.model.Event
 import org.jihye.acnhhb.domain.repository.EventRepository
@@ -19,24 +20,44 @@ class EventViewModel(
     settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
-    private val currentYear = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).year
+    private val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+    private val currentYear = today.year
 
     val state: StateFlow<EventListState> =
         combine(
             eventRepository.getEvents(year = currentYear.toString()),
+            eventRepository.getEvents(year = (currentYear + 1).toString()),
             settingsRepository.isNorth,
-        ) { events, isNorth ->
-            val filteredEvents = events.filter { event ->
-                when (isNorth) {
-                    true -> {
-                        (event.hemisphere == Event.HemisphereType.NORTHERN) || (event.hemisphere == Event.HemisphereType.BOTH)
-                    }
+        ) { thisYearEvents, nextYearEvents, isNorth ->
+            /**
+             * - 과거 데이터는 비노출
+             * - 현재 월의 이벤트가 최상단
+             * - 반구 필터링
+             * - 내년 이벤트까지 포함
+             * */
+            val allEvents = (thisYearEvents + nextYearEvents).sortedBy { it.date }
+            val currentMonthStart =
+                "${today.year}-${today.month.number.toString().padStart(2, '0')}-01"
 
-                    false -> {
-                        (event.hemisphere == Event.HemisphereType.SOUTHERN) || (event.hemisphere == Event.HemisphereType.BOTH)
-                    }
+            val filteredEvents =
+                allEvents.filter { event ->
+                    val isHemisphereMatch =
+                        when (isNorth) {
+                            true -> {
+                                (event.hemisphere == Event.HemisphereType.NORTHERN) ||
+                                    (event.hemisphere == Event.HemisphereType.BOTH)
+                            }
+
+                            false -> {
+                                (event.hemisphere == Event.HemisphereType.SOUTHERN) ||
+                                    (event.hemisphere == Event.HemisphereType.BOTH)
+                            }
+                        }
+
+                    val isFutureOrPresent = event.date >= currentMonthStart
+
+                    isHemisphereMatch && isFutureOrPresent
                 }
-            }
             EventListState.Success(filteredEvents) as EventListState
         }
             .catch { exception ->
