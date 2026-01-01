@@ -1,5 +1,7 @@
 package org.jihye.acnhhb.data.repository
 
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.jihye.acnhhb.data.mapper.toDomain
@@ -13,18 +15,24 @@ class VillagerRepositoryImpl(
 ) : VillagerRepository {
 
     override fun getVillagers(): Flow<List<Villager>> = flow {
-        val remoteVillagers = remoteDataSource.fetchVillagers(
-            species = null,
-            personality = null,
-            game = "nh",
-            isNhDetails = "true",
-        )
-        villagerNameProvider.load()
-        emit(
-            remoteVillagers.map {
-                val localizedName = villagerNameProvider.getName(it.id)
-                it.toDomain(localizedName)
+        coroutineScope {
+            val remoteVillagersDeferred = async {
+                remoteDataSource.fetchVillagers(
+                    species = null,
+                    personality = null,
+                    game = "nh",
+                    isNhDetails = "true",
+                )
             }
-        )
+            async { villagerNameProvider.load() }.await()
+            val remoteVillagers = remoteVillagersDeferred.await()
+
+            emit(
+                remoteVillagers.map {
+                    val localizedName = villagerNameProvider.getName(it.id)
+                    it.toDomain(localizedName)
+                }
+            )
+        }
     }
 }
