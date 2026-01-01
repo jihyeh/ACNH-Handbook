@@ -1,11 +1,13 @@
 package org.jihye.acnhhb.data.remote
 
+import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.client.request.header
@@ -31,7 +33,28 @@ class NookipediaNetwork {
                 register(ContentType.Application.Json, KotlinxSerializationConverter(json))
                 register(ContentType.Text.Plain, KotlinxSerializationConverter(json))
             }
-            install(Logging) { level = LogLevel.ALL }
+            install(Logging) {
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        if (message.startsWith("{") || message.startsWith("[")) {
+                            try {
+                                val json = Json {
+                                    prettyPrint = true
+                                    isLenient = true
+                                    ignoreUnknownKeys = true
+                                }
+                                val element = json.parseToJsonElement(message)
+                                Napier.i(tag = "NookipediaNetwork") { (json.encodeToString(element)) }
+                            } catch (e: Exception) {
+                                Napier.i(tag = "NookipediaNetwork") { message }
+                            }
+                        } else {
+                            Napier.i(tag = "NookipediaNetwork") { message }
+                        }
+                    }
+                }
+                level = LogLevel.ALL
+            }
             install(HttpTimeout) {
                 connectTimeoutMillis = TIMEOUT_MILLIS
                 requestTimeoutMillis = TIMEOUT_MILLIS
@@ -55,9 +78,7 @@ class NookipediaNetwork {
     ): T {
         return httpClient
             .get(path) {
-                parameters.forEach { (key, value) ->
-                    if (value != null) parameter(key, value)
-                }
+                parameters.forEach { (key, value) -> if (value != null) parameter(key, value) }
             }
             .body()
     }
