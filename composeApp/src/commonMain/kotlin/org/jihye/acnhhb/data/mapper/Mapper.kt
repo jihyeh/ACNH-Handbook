@@ -5,10 +5,12 @@ import org.jihye.acnhhb.data.remote.dto.VillagerResponse
 import org.jihye.acnhhb.domain.model.NhDetails
 import org.jihye.acnhhb.domain.model.Villager
 
-fun VillagerResponse.toDomain(): Villager {
+fun VillagerResponse.toDomain(
+    localizedName: String? = null,
+): Villager {
     return Villager(
         id = id,
-        name = name,
+        name = localizedName ?: name,
         url = url,
         altName = altName,
         titleColor = titleColor,

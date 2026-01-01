@@ -9,6 +9,7 @@ import org.jihye.acnhhb.domain.repository.VillagerRepository
 
 class VillagerRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
+    private val villagerNameProvider: VillagerNameProvider,
 ) : VillagerRepository {
 
     override fun getVillagers(): Flow<List<Villager>> = flow {
@@ -18,8 +19,12 @@ class VillagerRepositoryImpl(
             game = "nh",
             isNhDetails = "true",
         )
+        villagerNameProvider.load()
         emit(
-            remoteVillagers.map { it.toDomain() }
+            remoteVillagers.map {
+                val localizedName = villagerNameProvider.getName(it.id)
+                it.toDomain(localizedName)
+            }
         )
     }
 }

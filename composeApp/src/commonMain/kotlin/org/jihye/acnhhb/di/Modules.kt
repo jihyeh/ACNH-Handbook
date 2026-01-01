@@ -19,6 +19,7 @@ import org.jihye.acnhhb.data.repository.RecipeRepositoryImpl
 import org.jihye.acnhhb.data.repository.SeaCreatureRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
 import org.jihye.acnhhb.data.repository.ToolRepositoryImpl
+import org.jihye.acnhhb.data.repository.VillagerNameProvider
 import org.jihye.acnhhb.data.repository.VillagerRepositoryImpl
 import org.jihye.acnhhb.domain.repository.ArtRepository
 import org.jihye.acnhhb.domain.repository.BugRepository
@@ -54,6 +55,7 @@ import org.jihye.acnhhb.ui.sea.SeaCreatureViewModel
 import org.jihye.acnhhb.ui.settings.SettingsViewModel
 import org.jihye.acnhhb.ui.tool.ToolViewModel
 import org.jihye.acnhhb.ui.villager.VillagerViewModel
+import org.jihye.acnhhb.util.AppLocaleManager
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -65,6 +67,8 @@ val dataModule = module {
     singleOf(::NookipediaNetwork)
     singleOf(::RemoteDataSource)
     single { createDataStore() }
+    singleOf(::AppLocaleManager)
+    singleOf(::VillagerNameProvider)
 }
 
 val repositoryModule = module {
