@@ -3,10 +3,10 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.BugResponse
 import org.jihye.acnhhb.domain.model.Bug
 
-fun BugResponse.toDomain(): Bug {
+fun BugResponse.toDomain(localizedName: String? = null): Bug {
     return Bug(
         number = number,
-        name = name,
+        name = localizedName ?: name,
         url = url ?: "",
         imageUrl = imageUrl,
         renderUrl = renderUrl ?: "",

@@ -2,11 +2,11 @@ package org.jihye.acnhhb.di
 
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
-import org.jihye.acnhhb.BuildConfig
 import org.jihye.acnhhb.data.createDataStore
 import org.jihye.acnhhb.data.remote.NookipediaNetwork
 import org.jihye.acnhhb.data.remote.RemoteDataSource
 import org.jihye.acnhhb.data.repository.ArtRepositoryImpl
+import org.jihye.acnhhb.data.repository.BugNameProvider
 import org.jihye.acnhhb.data.repository.BugRepositoryImpl
 import org.jihye.acnhhb.data.repository.ClothingRepositoryImpl
 import org.jihye.acnhhb.data.repository.EventRepositoryImpl
@@ -72,6 +72,7 @@ val dataModule = module {
     single { createDataStore() }
     singleOf(::AppLocaleManager)
     singleOf(::VillagerNameProvider)
+    singleOf(::BugNameProvider)
 }
 
 val repositoryModule = module {
