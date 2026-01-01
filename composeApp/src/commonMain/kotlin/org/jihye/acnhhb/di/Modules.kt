@@ -1,5 +1,8 @@
 package org.jihye.acnhhb.di
 
+import io.github.aakira.napier.DebugAntilog
+import io.github.aakira.napier.Napier
+import org.jihye.acnhhb.BuildConfig
 import org.jihye.acnhhb.data.createDataStore
 import org.jihye.acnhhb.data.remote.NookipediaNetwork
 import org.jihye.acnhhb.data.remote.RemoteDataSource
@@ -113,7 +116,10 @@ val viewModelModule = module {
 
 val appModules = listOf(dataModule, repositoryModule, viewModelModule)
 
-fun startDependencyInjection(appDeclaration: KoinAppDeclaration = {}) = startKoin {
+fun startInit(
+    appDeclaration: KoinAppDeclaration = {}
+) = startKoin {
+    Napier.base(DebugAntilog())
     appDeclaration()
     modules(appModules)
 }

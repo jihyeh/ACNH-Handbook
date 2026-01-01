@@ -80,6 +80,9 @@ kotlin {
             // AboutLibraries
             implementation(libs.aboutlibraries.core)
             implementation(libs.aboutLibraries.compose)
+
+            // Logging
+            implementation(libs.napier)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -1,7 +1,7 @@
 package org.jihye.acnhhb
 
 import androidx.compose.ui.window.ComposeUIViewController
-import org.jihye.acnhhb.di.startDependencyInjection
+import org.jihye.acnhhb.di.startInit
 
 fun MainViewController() = ComposeUIViewController {
     KoinInitializer.init()
@@ -12,7 +12,7 @@ private object KoinInitializer {
     private var isInit = false
     fun init() {
         if (!isInit) {
-            startDependencyInjection()
+            startInit()
             isInit = true
         }
     }

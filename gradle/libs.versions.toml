@@ -26,6 +26,7 @@ navigation3 = "1.0.0"
 cmpNavigation3 = "1.0.0-alpha06"
 materialIconsExtended = "1.7.3"
 aboutLibraries = "13.2.1"
+napier = "2.7.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -66,6 +67,9 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 # Coil
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
+
+# Logging
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 
 # Serialization
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
