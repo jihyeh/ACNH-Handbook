@@ -3,9 +3,9 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.GyroidResponse
 import org.jihye.acnhhb.domain.model.Gyroid
 
-fun GyroidResponse.toDomain(): Gyroid {
+fun GyroidResponse.toDomain(localizedName: String? = null): Gyroid {
     return Gyroid(
-        name = name,
+        name = localizedName ?: name,
         url = url,
         imageUrl = variations?.firstOrNull()?.imageUrl ?: "",
         sell = sell,

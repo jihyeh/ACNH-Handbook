@@ -17,6 +17,7 @@ import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
 import org.jihye.acnhhb.data.repository.FossilNameProvider
 import org.jihye.acnhhb.data.repository.FossilRepositoryImpl
 import org.jihye.acnhhb.data.repository.FurnitureRepositoryImpl
+import org.jihye.acnhhb.data.repository.GyroidNameProvider
 import org.jihye.acnhhb.data.repository.GyroidRepositoryImpl
 import org.jihye.acnhhb.data.repository.InteriorRepositoryImpl
 import org.jihye.acnhhb.data.repository.ItemRepositoryImpl
@@ -81,6 +82,7 @@ val dataModule = module {
     singleOf(::SeaCreatureNameProvider)
     singleOf(::ArtNameProvider)
     singleOf(::FossilNameProvider)
+    singleOf(::GyroidNameProvider)
 }
 
 val repositoryModule = module {
