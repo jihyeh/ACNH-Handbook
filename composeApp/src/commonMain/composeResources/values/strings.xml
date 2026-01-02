@@ -50,6 +50,7 @@
     <string name="material_type_fence">울타리</string>
     <string name="material_type_other">기타</string>
     <string name="material_type_trash">쓰레기</string>
+    <string name="suffix_birthday">의 생일</string>
 
     <string name="oss_license">오픈소스 라이센스</string>
 </resources>

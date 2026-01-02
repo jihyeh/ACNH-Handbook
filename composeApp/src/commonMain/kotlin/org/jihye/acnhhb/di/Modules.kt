@@ -11,6 +11,7 @@ import org.jihye.acnhhb.data.repository.BugNameProvider
 import org.jihye.acnhhb.data.repository.BugRepositoryImpl
 import org.jihye.acnhhb.data.repository.ClothingNameProvider
 import org.jihye.acnhhb.data.repository.ClothingRepositoryImpl
+import org.jihye.acnhhb.data.repository.EventNameProvider
 import org.jihye.acnhhb.data.repository.EventRepositoryImpl
 import org.jihye.acnhhb.data.repository.FishNameProvider
 import org.jihye.acnhhb.data.repository.FishRepositoryImpl
@@ -97,6 +98,7 @@ val dataModule = module {
     singleOf(::InteriorNameProvider)
     singleOf(::RecipeNameProvider)
     singleOf(::PhotoNameProvider)
+    singleOf(::EventNameProvider)
 }
 
 val repositoryModule = module {

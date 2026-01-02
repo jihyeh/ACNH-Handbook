@@ -3,10 +3,10 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.EventResponse
 import org.jihye.acnhhb.domain.model.Event
 
-fun EventResponse.toDomain(): Event {
+fun EventResponse.toDomain(localizedName: String? = null): Event {
     val (cleanedName, hemisphere) = parseHemisphere(event)
     return Event(
-        name = cleanedName,
+        name = localizedName ?: cleanedName,
         date = date,
         type = parseType(type),
         url = url,
@@ -14,7 +14,7 @@ fun EventResponse.toDomain(): Event {
     )
 }
 
-private fun parseType(type: String): Event.EventType {
+fun parseType(type: String): Event.EventType {
     return when (type) {
         "Event" -> Event.EventType.EVENT
         "Nook Shopping" -> Event.EventType.NOOK_SHOPPING
@@ -26,7 +26,7 @@ private fun parseType(type: String): Event.EventType {
     }
 }
 
-private fun parseHemisphere(eventName: String): Pair<String, Event.HemisphereType> {
+fun parseHemisphere(eventName: String): Pair<String, Event.HemisphereType> {
     return when {
         eventName.contains("(Northern Hemisphere)") -> {
             eventName.replace("(Northern Hemisphere)", "").trim() to Event.HemisphereType.NORTHERN

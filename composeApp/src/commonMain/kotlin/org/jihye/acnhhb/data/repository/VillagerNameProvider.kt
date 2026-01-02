@@ -9,6 +9,7 @@ import org.jihye.acnhhb.util.AppLocaleManager
 
 class VillagerNameProvider(private val appLocaleManager: AppLocaleManager) {
     private var nameMap: Map<String, VillagerTranslation> = emptyMap()
+    private var enNameMap: Map<String, VillagerTranslation> = emptyMap()
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -20,6 +21,7 @@ class VillagerNameProvider(private val appLocaleManager: AppLocaleManager) {
             val jsonString = bytes.decodeToString()
             val items = json.decodeFromString<List<VillagerTranslation>>(jsonString)
             nameMap = items.associateBy { it.id }
+            enNameMap = items.associateBy { it.enName?.lowercase() ?: "" }
         } catch (e: Exception) {
             e.printStackTrace()
             nameMap = emptyMap()
@@ -33,6 +35,20 @@ class VillagerNameProvider(private val appLocaleManager: AppLocaleManager) {
         }
 
         val item = nameMap[id] ?: return null
+        return if (appLocaleManager.isKorean()) {
+            item.krName
+        } else {
+            item.enName
+        }
+    }
+
+    suspend fun getNameByEnName(enName: String?): String? {
+        if (enName == null) return null
+        if (enNameMap.isEmpty()) {
+            load()
+        }
+
+        val item = enNameMap[enName.lowercase()] ?: return null
         return if (appLocaleManager.isKorean()) {
             item.krName
         } else {
