@@ -13,8 +13,8 @@ fun FossilResponse.toDomain(): Fossil {
         description = description ?: "",
         interactable = interactable ?: false,
         hhaBase = hhaBase ?: 0,
-        width = width ?: 0,
-        length = length ?: 0,
+        width = width ?: 0f,
+        length = length ?: 0f,
         colors = colors ?: emptyList(),
     )
 }

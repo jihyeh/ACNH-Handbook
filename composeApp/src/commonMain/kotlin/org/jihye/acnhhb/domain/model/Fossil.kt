@@ -9,7 +9,7 @@ data class Fossil(
     val description: String,
     val interactable: Boolean,
     val hhaBase: Int,
-    val width: Int,
-    val length: Int,
+    val width: Float,
+    val length: Float,
     val colors: List<String>,
 )

@@ -17,7 +17,7 @@ data class FossilResponse(
     val interactable: Boolean? = null,
     @SerialName("hha_base")
     val hhaBase: Int? = null,
-    val width: Int? = null,
-    val length: Int? = null,
+    val width: Float? = null,
+    val length: Float? = null,
     val colors: List<String>? = null,
 )
