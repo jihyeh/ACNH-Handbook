@@ -3,9 +3,9 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.PhotoResponse
 import org.jihye.acnhhb.domain.model.Photo
 
-fun PhotoResponse.toDomain(): Photo {
+fun PhotoResponse.toDomain(localizedName: String? = null): Photo {
     return Photo(
-        name = name,
+        name = localizedName ?: name,
         url = url,
         category = category,
         imageUrl = variations?.firstOrNull()?.imageUrl ?: "",

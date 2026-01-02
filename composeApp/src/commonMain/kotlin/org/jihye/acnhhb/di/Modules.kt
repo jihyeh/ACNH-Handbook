@@ -25,6 +25,7 @@ import org.jihye.acnhhb.data.repository.InteriorNameProvider
 import org.jihye.acnhhb.data.repository.InteriorRepositoryImpl
 import org.jihye.acnhhb.data.repository.ItemNameProvider
 import org.jihye.acnhhb.data.repository.ItemRepositoryImpl
+import org.jihye.acnhhb.data.repository.PhotoNameProvider
 import org.jihye.acnhhb.data.repository.PhotoRepositoryImpl
 import org.jihye.acnhhb.data.repository.RecipeNameProvider
 import org.jihye.acnhhb.data.repository.RecipeRepositoryImpl
@@ -95,6 +96,7 @@ val dataModule = module {
     singleOf(::FurnitureNameProvider)
     singleOf(::InteriorNameProvider)
     singleOf(::RecipeNameProvider)
+    singleOf(::PhotoNameProvider)
 }
 
 val repositoryModule = module {
