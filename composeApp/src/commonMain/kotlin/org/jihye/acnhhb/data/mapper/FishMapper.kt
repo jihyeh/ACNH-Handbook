@@ -3,10 +3,10 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.FishResponse
 import org.jihye.acnhhb.domain.model.Fish
 
-fun FishResponse.toDomain(): Fish {
+fun FishResponse.toDomain(localizedName: String? = null): Fish {
     return Fish(
         number = number,
-        name = name,
+        name = localizedName ?: name,
         url = url ?: "",
         imageUrl = imageUrl,
         renderUrl = renderUrl ?: "",

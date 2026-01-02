@@ -10,6 +10,7 @@ import org.jihye.acnhhb.data.repository.BugNameProvider
 import org.jihye.acnhhb.data.repository.BugRepositoryImpl
 import org.jihye.acnhhb.data.repository.ClothingRepositoryImpl
 import org.jihye.acnhhb.data.repository.EventRepositoryImpl
+import org.jihye.acnhhb.data.repository.FishNameProvider
 import org.jihye.acnhhb.data.repository.FishRepositoryImpl
 import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
 import org.jihye.acnhhb.data.repository.FossilRepositoryImpl
@@ -73,6 +74,7 @@ val dataModule = module {
     singleOf(::AppLocaleManager)
     singleOf(::VillagerNameProvider)
     singleOf(::BugNameProvider)
+    singleOf(::FishNameProvider)
 }
 
 val repositoryModule = module {
