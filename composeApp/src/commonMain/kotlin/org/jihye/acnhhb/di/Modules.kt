@@ -20,6 +20,7 @@ import org.jihye.acnhhb.data.repository.FurnitureRepositoryImpl
 import org.jihye.acnhhb.data.repository.GyroidNameProvider
 import org.jihye.acnhhb.data.repository.GyroidRepositoryImpl
 import org.jihye.acnhhb.data.repository.InteriorRepositoryImpl
+import org.jihye.acnhhb.data.repository.ItemNameProvider
 import org.jihye.acnhhb.data.repository.ItemRepositoryImpl
 import org.jihye.acnhhb.data.repository.PhotoRepositoryImpl
 import org.jihye.acnhhb.data.repository.RecipeRepositoryImpl
@@ -83,6 +84,7 @@ val dataModule = module {
     singleOf(::ArtNameProvider)
     singleOf(::FossilNameProvider)
     singleOf(::GyroidNameProvider)
+    singleOf(::ItemNameProvider)
 }
 
 val repositoryModule = module {

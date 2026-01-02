@@ -1,5 +1,7 @@
 package org.jihye.acnhhb.data.repository
 
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.jihye.acnhhb.data.mapper.toDomain
@@ -9,13 +11,24 @@ import org.jihye.acnhhb.domain.repository.ItemRepository
 
 class ItemRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
+    private val itemNameProvider: ItemNameProvider,
 ) : ItemRepository {
 
     override fun getItems(): Flow<List<Item>> = flow {
-        val remoteItems = remoteDataSource.fetchItems(
-            thumbnailSize = null,
-            isExcludeDetails = null
-        )
-        emit(remoteItems.map { it.toDomain() })
+        coroutineScope {
+            val remoteItemsDeferred = async {
+                remoteDataSource.fetchItems(thumbnailSize = null, isExcludeDetails = null)
+            }
+            async { itemNameProvider.load() }.await()
+
+            val remoteItems = remoteItemsDeferred.await()
+
+            emit(
+                remoteItems.map {
+                    val localizedName = itemNameProvider.getName(it.name)
+                    it.toDomain(localizedName)
+                }
+            )
+        }
     }
 }

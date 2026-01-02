@@ -5,9 +5,9 @@ import org.jihye.acnhhb.domain.model.Availability as DomainAvailability
 import org.jihye.acnhhb.domain.model.Buy as DomainBuy
 import org.jihye.acnhhb.domain.model.Item
 
-fun ItemResponse.toDomain(): Item {
+fun ItemResponse.toDomain(localizedName: String? = null): Item {
     return Item(
-        name = name,
+        name = localizedName ?: name,
         url = url,
         imageUrl = imageUrl,
         stack = stack ?: 0,
