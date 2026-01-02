@@ -27,6 +27,7 @@ import org.jihye.acnhhb.data.repository.RecipeRepositoryImpl
 import org.jihye.acnhhb.data.repository.SeaCreatureNameProvider
 import org.jihye.acnhhb.data.repository.SeaCreatureRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
+import org.jihye.acnhhb.data.repository.ToolNameProvider
 import org.jihye.acnhhb.data.repository.ToolRepositoryImpl
 import org.jihye.acnhhb.data.repository.VillagerNameProvider
 import org.jihye.acnhhb.data.repository.VillagerRepositoryImpl
@@ -85,6 +86,7 @@ val dataModule = module {
     singleOf(::FossilNameProvider)
     singleOf(::GyroidNameProvider)
     singleOf(::ItemNameProvider)
+    singleOf(::ToolNameProvider)
 }
 
 val repositoryModule = module {
