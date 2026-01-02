@@ -3,9 +3,9 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.InteriorResponse
 import org.jihye.acnhhb.domain.model.Interior
 
-fun InteriorResponse.toDomain(): Interior {
+fun InteriorResponse.toDomain(localizedName: String? = null): Interior {
     return Interior(
-        name = name,
+        name = localizedName ?: name,
         url = url,
         imageUrl = imageUrl ?: "",
         category = category ?: "",

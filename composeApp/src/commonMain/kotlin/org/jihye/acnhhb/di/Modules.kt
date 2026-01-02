@@ -21,6 +21,7 @@ import org.jihye.acnhhb.data.repository.FurnitureNameProvider
 import org.jihye.acnhhb.data.repository.FurnitureRepositoryImpl
 import org.jihye.acnhhb.data.repository.GyroidNameProvider
 import org.jihye.acnhhb.data.repository.GyroidRepositoryImpl
+import org.jihye.acnhhb.data.repository.InteriorNameProvider
 import org.jihye.acnhhb.data.repository.InteriorRepositoryImpl
 import org.jihye.acnhhb.data.repository.ItemNameProvider
 import org.jihye.acnhhb.data.repository.ItemRepositoryImpl
@@ -91,6 +92,7 @@ val dataModule = module {
     singleOf(::ToolNameProvider)
     singleOf(::ClothingNameProvider)
     singleOf(::FurnitureNameProvider)
+    singleOf(::InteriorNameProvider)
 }
 
 val repositoryModule = module {
