@@ -14,6 +14,7 @@ import org.jihye.acnhhb.data.repository.EventRepositoryImpl
 import org.jihye.acnhhb.data.repository.FishNameProvider
 import org.jihye.acnhhb.data.repository.FishRepositoryImpl
 import org.jihye.acnhhb.data.repository.FlowerBreedingRepositoryImpl
+import org.jihye.acnhhb.data.repository.FossilNameProvider
 import org.jihye.acnhhb.data.repository.FossilRepositoryImpl
 import org.jihye.acnhhb.data.repository.FurnitureRepositoryImpl
 import org.jihye.acnhhb.data.repository.GyroidRepositoryImpl
@@ -79,6 +80,7 @@ val dataModule = module {
     singleOf(::FishNameProvider)
     singleOf(::SeaCreatureNameProvider)
     singleOf(::ArtNameProvider)
+    singleOf(::FossilNameProvider)
 }
 
 val repositoryModule = module {

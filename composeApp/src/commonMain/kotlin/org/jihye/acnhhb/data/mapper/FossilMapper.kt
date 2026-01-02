@@ -3,9 +3,9 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.FossilResponse
 import org.jihye.acnhhb.domain.model.Fossil
 
-fun FossilResponse.toDomain(): Fossil {
+fun FossilResponse.toDomain(localizedName: String? = null): Fossil {
     return Fossil(
-        name = name,
+        name = localizedName ?: name,
         url = url ?: "",
         imageUrl = imageUrl,
         price = price,
