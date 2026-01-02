@@ -3,9 +3,9 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.FurnitureResponse
 import org.jihye.acnhhb.domain.model.Furniture
 
-fun FurnitureResponse.toDomain(): Furniture {
+fun FurnitureResponse.toDomain(localizedName: String? = null): Furniture {
     return Furniture(
-        name = name,
+        name = localizedName ?: name,
         url = url,
         imageUrl = variations?.firstOrNull()?.imageUrl ?: "",
         category = category ?: "",

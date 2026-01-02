@@ -28,6 +28,7 @@
     <string name="settings_version">Version: </string>
 
     <string name="fake_exist">가품 있음</string>
+    <string name="suffix_fake"> (가품)</string>
 
     <string name="material_type">타입</string>
     <string name="material_type_none">전체</string>
