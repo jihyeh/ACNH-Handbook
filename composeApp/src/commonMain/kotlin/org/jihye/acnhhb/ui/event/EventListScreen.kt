@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -92,12 +92,15 @@ fun EventListContent(
             stickyHeader {
                 MonthHeader(month = month)
             }
-
-            items(
+            itemsIndexed(
                 items = monthEvents,
-                key = { "${it.date}-${it.name}" }
-            ) { event ->
-                EventItem(event = event)
+                key = { index, item ->
+                    "${item.date}-${item.name}" + index
+                }
+            ) { _, item ->
+                EventItem(
+                    event = item,
+                )
             }
         }
     }

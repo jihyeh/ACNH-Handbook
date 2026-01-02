@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -85,8 +85,16 @@ fun PhotoListContent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier.fillMaxSize()
     ) {
-        items(items = photos, key = { it.name }) { item ->
-            PhotoItem(photo = item, onClick = { /* TODO: Navigate to detail */ })
+        itemsIndexed(
+            items = photos,
+            key = { index, item ->
+                item.name + index
+            }
+        ) { _, item ->
+            PhotoItem(
+                photo = item,
+                onClick = { /* TODO: Navigate to detail */ }
+            )
         }
     }
 }

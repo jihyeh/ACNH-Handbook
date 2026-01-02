@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -85,10 +85,12 @@ fun FurnitureListContent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier.fillMaxSize()
     ) {
-        items(
+        itemsIndexed(
             items = furniture,
-            key = { it.name } // Assuming name is unique enough for now, or use a combination
-        ) { item ->
+            key = { index, item ->
+                item.name + index
+            }
+        ) { _, item ->
             FurnitureItem(
                 furniture = item,
                 onClick = { /* TODO: Navigate to detail */ }

@@ -87,7 +87,9 @@ fun RecipeListContent(
     ) {
         items(
             items = recipes,
-            key = { it.serialId }
+            key = {
+                it.name + it.serialId
+            }
         ) { item ->
             RecipeItem(
                 recipe = item,
