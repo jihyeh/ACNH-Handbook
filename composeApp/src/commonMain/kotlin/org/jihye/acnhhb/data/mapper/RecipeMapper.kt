@@ -3,9 +3,9 @@ package org.jihye.acnhhb.data.mapper
 import org.jihye.acnhhb.data.remote.dto.RecipeResponse
 import org.jihye.acnhhb.domain.model.Recipe
 
-fun RecipeResponse.toDomain(): Recipe {
+fun RecipeResponse.toDomain(localizedName: String? = null): Recipe {
     return Recipe(
-        name = name,
+        name = localizedName ?: name,
         url = url,
         imageUrl = imageUrl ?: "",
         serialId = serialId ?: 0,
