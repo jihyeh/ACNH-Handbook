@@ -5,6 +5,7 @@ import io.github.aakira.napier.Napier
 import org.jihye.acnhhb.data.createDataStore
 import org.jihye.acnhhb.data.remote.NookipediaNetwork
 import org.jihye.acnhhb.data.remote.RemoteDataSource
+import org.jihye.acnhhb.data.repository.ArtNameProvider
 import org.jihye.acnhhb.data.repository.ArtRepositoryImpl
 import org.jihye.acnhhb.data.repository.BugNameProvider
 import org.jihye.acnhhb.data.repository.BugRepositoryImpl
@@ -77,6 +78,7 @@ val dataModule = module {
     singleOf(::BugNameProvider)
     singleOf(::FishNameProvider)
     singleOf(::SeaCreatureNameProvider)
+    singleOf(::ArtNameProvider)
 }
 
 val repositoryModule = module {

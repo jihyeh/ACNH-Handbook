@@ -4,9 +4,9 @@ import org.jihye.acnhhb.data.remote.dto.ArtResponse
 import org.jihye.acnhhb.domain.model.Art
 import org.jihye.acnhhb.domain.model.ArtInfo as DomainArtInfo
 
-fun ArtResponse.toDomain(): Art {
+fun ArtResponse.toDomain(localizedName: String? = null): Art {
     return Art(
-        name = name,
+        name = localizedName ?: name,
         url = url ?: "",
         imageUrl = imageUrl,
         hasFake = hasFake ?: false,
