@@ -1,12 +1,10 @@
 package org.jihye.acnhhb.data.repository
 
 import acnhhandbook.composeapp.generated.resources.Res
-import acnhhandbook.composeapp.generated.resources.suffix_fake
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.getString
 import org.jihye.acnhhb.util.AppLocaleManager
 
 class FurnitureNameProvider(private val appLocaleManager: AppLocaleManager) {
@@ -60,8 +58,7 @@ class FurnitureNameProvider(private val appLocaleManager: AppLocaleManager) {
             val item = nameMap[baseName]
             return if (item != null) {
                 if (appLocaleManager.isKorean()) {
-                    val suffix = getString(Res.string.suffix_fake)
-                    "${item.krName}$suffix"
+                    "${item.krName}$FAKE_SUFFIX_KR"
                 } else {
                     "${item.enName}$FAKE_SUFFIX_EN"
                 }
@@ -98,6 +95,7 @@ class FurnitureNameProvider(private val appLocaleManager: AppLocaleManager) {
         private const val LOCALE_KEY_ID = "Id"
         private const val LOCALE_KEY_KOREAN = "KRko"
         private const val LOCALE_KEY_ENGLISH = "USen"
-        private const val FAKE_SUFFIX_EN = " (fake)"
+        private const val FAKE_SUFFIX_EN = "(fake)"
+        private const val FAKE_SUFFIX_KR = "(가품)"
     }
 }
