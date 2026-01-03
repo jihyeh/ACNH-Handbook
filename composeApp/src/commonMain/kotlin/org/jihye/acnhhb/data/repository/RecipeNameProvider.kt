@@ -101,7 +101,7 @@ class RecipeNameProvider(private val appLocaleManager: AppLocaleManager) {
         private const val DISHES_JSON_PATH = "files/translate/dishes.json"
         private const val FENCING_JSON_PATH = "files/translate/fencing.json"
         private const val DOOR_DECO_JSON_PATH = "files/translate/door deco.json"
-        private const val EVENT_ITEMS_JSON_PATH = "files/translate/event items.json"
+        private const val EVENT_ITEMS_JSON_PATH = "files/translate/event_items.json"
 
         private const val LOCALE_KEY_ID = "Id"
         private const val LOCALE_KEY_KOREAN = "KRko"
