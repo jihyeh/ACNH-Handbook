@@ -16,6 +16,7 @@ class EventNameProvider(
     private var nameMap: Map<String, EventTranslation> = emptyMap()
     private var eventItemsMap: Map<String, EventTranslation> = emptyMap()
     private var itemMap: Map<String, EventTranslation> = emptyMap()
+    private var specialCharactersMap: Map<String, EventTranslation> = emptyMap()
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -37,12 +38,20 @@ class EventNameProvider(
             val itemMapJsonString = itemMapBytes.decodeToString()
             val itemMapItems = json.decodeFromString<List<EventTranslation>>(itemMapJsonString)
             itemMap = itemMapItems.associateBy { it.enName?.lowercase()?.trim() ?: "" }
+
+            val specialCharactersBytes = Res.readBytes(SPECIAL_CHARACTERS_JSON_PATH)
+            val specialCharactersJsonString = specialCharactersBytes.decodeToString()
+            val specialCharactersItems =
+                json.decodeFromString<List<EventTranslation>>(specialCharactersJsonString)
+            specialCharactersMap =
+                specialCharactersItems.associateBy { it.enName?.lowercase()?.trim() ?: "" }
         } catch (e: Exception) {
             e.printStackTrace()
             // Keep what we loaded
             if (nameMap.isEmpty()) nameMap = emptyMap()
             if (eventItemsMap.isEmpty()) eventItemsMap = emptyMap()
             if (itemMap.isEmpty()) itemMap = emptyMap()
+            if (specialCharactersMap.isEmpty()) specialCharactersMap = emptyMap()
         }
     }
 
@@ -54,7 +63,13 @@ class EventNameProvider(
         // 생일 이벤트 처리
         if (type == EVENT_TYPE_BIRTHDAY || name.contains(KEYWORD_BIRTHDAY)) {
             val villagerName = name.replace(SUFFIX_S_BIRTHDAY, "", ignoreCase = true).trim()
-            val localizedVillager = villagerNameProvider.getNameByEnName(villagerName)
+            val localizedVillager =
+                villagerNameProvider.getNameByEnName(villagerName)
+                    ?: specialCharactersMap[villagerName.lowercase()]?.krName
+                    ?: specialCharactersMap.values.find {
+                        it.enName?.contains(villagerName, ignoreCase = true) == true
+                    }?.krName
+
             if (localizedVillager != null && appLocaleManager.isKorean()) {
                 return localizedVillager + getString(Res.string.suffix_birthday)
             }
@@ -146,6 +161,7 @@ class EventNameProvider(
         private const val EVENT_NAMES_JSON_PATH = "files/translate/event_names.json"
         private const val EVENT_ITEMS_JSON_PATH = "files/translate/event_items.json"
         private const val ITEM_JSON_PATH = "files/translate/item.json"
+        private const val SPECIAL_CHARACTERS_JSON_PATH = "files/translate/special_characters.json"
 
         private const val LOCALE_KEY_ID = "Id"
         private const val LOCALE_KEY_KOREAN = "KRko"
