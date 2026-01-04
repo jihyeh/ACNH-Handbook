@@ -55,9 +55,14 @@ class EventViewModel(
                         }
 
                     val isFutureOrPresent = event.date >= currentMonthStart
-
                     isHemisphereMatch && isFutureOrPresent
+                }.map { event ->
+                    EventUiModel(
+                        event = event,
+                        isToday = event.date == today.toString()
+                    )
                 }
+
             EventListState.Success(filteredEvents) as EventListState
         }
             .catch { exception ->
@@ -70,8 +75,13 @@ class EventViewModel(
             )
 }
 
+data class EventUiModel(
+    val event: Event,
+    val isToday: Boolean,
+)
+
 sealed interface EventListState {
     data object Loading : EventListState
-    data class Success(val events: List<Event>) : EventListState
+    data class Success(val events: List<EventUiModel>) : EventListState
     data class Error(val message: String) : EventListState
 }

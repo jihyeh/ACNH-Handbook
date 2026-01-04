@@ -3,10 +3,12 @@ package org.jihye.acnhhb.ui.event
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.home_events
 import acnhhandbook.composeapp.generated.resources.ic_home_event
+import acnhhandbook.composeapp.generated.resources.today
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -76,30 +78,23 @@ fun EventListScreen(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun EventListContent(
-    events: List<Event>,
+    events: List<EventUiModel>,
     modifier: Modifier = Modifier,
 ) {
     val groupedEvents =
         remember(events) {
-            events.groupBy { it.date.substring(0, 7) }
+            events.groupBy { it.event.date.substring(0, 7) }
         } // YYYY-MM grouping
 
-    LazyColumn(
-        contentPadding = PaddingValues(bottom = 16.dp),
-        modifier = modifier
-    ) {
+    LazyColumn(contentPadding = PaddingValues(bottom = 16.dp), modifier = modifier) {
         groupedEvents.forEach { (month, monthEvents) ->
-            stickyHeader {
-                MonthHeader(month = month)
-            }
+            stickyHeader { MonthHeader(month = month) }
             itemsIndexed(
                 items = monthEvents,
-                key = { index, item ->
-                    "${item.date}-${item.name}" + index
-                }
+                key = { index, item -> "${item.event.date}-${item.event.name}" + index }
             ) { _, item ->
                 EventItem(
-                    event = item,
+                    model = item,
                 )
             }
         }
@@ -139,11 +134,20 @@ fun MonthHeader(
 
 @Composable
 fun EventItem(
-    event: Event,
+    model: EventUiModel,
     modifier: Modifier = Modifier,
 ) {
+    val event = model.event
+    val isToday = model.isToday
+
     Row(
-        modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+        modifier = modifier.fillMaxWidth()
+            .then(
+                if (isToday)
+                    Modifier.background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f))
+                else Modifier
+            )
+            .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -152,18 +156,34 @@ fun EventItem(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text(
-                text = event.date.substring(8), // DD
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            Box(contentAlignment = Alignment.Center) {
+                Text(
+                    text = event.date.substring(8), // DD
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = if (isToday) {
+                        MaterialTheme.colorScheme.primary
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    }
+                )
+            }
 
-            Text(
-                text = event.name,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+            Column {
+                if (isToday) {
+                    Text(
+                        text = stringResource(Res.string.today),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Text(
+                    text = event.name,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
         }
 
         EventTypeBadge(type = event.type)
