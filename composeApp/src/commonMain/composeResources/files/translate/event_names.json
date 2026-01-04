@@ -181,6 +181,24 @@
   },
   {
     "SourceSheet": "Event Names",
+    "Id": "FishingConvention",
+    "EUde": "Angelturnier",
+    "EUen": "Fishing Tourney",
+    "EUit": "Torneo di pesca",
+    "EUnl": "vistoernooi",
+    "EUru": "турнир «Мастер удочки»",
+    "EUfr": "Tournoi de pêche",
+    "EUes": "T. de Pesca de",
+    "USen": "Fishing Tourney",
+    "USfr": "Tournoi de pêche",
+    "USes": "T. de Pesca de",
+    "JPja": "釣り大会",
+    "KRko": "낚시대회",
+    "TWzh": "季釣魚大會",
+    "CNzh": "季钓鱼大赛"
+  },
+  {
+    "SourceSheet": "Event Names",
     "Id": "GrapeHarvestFestival",
     "EUde": "Traubenlese-Festival",
     "EUen": "Grape Harvest Festival",
@@ -409,7 +427,7 @@
     "USfr": "Shōgatsu",
     "USes": "Shōgatsu",
     "JPja": "正月",
-    "KRko": "새해",
+    "KRko": "새해(쇼가쓰)",
     "TWzh": "新年",
     "CNzh": "新年"
   },
@@ -949,7 +967,7 @@
     "USfr": "Shōgatsu",
     "USes": "Shōgatsu",
     "JPja": "正月",
-    "KRko": "새해",
+    "KRko": "새해(쇼가쓰)",
     "TWzh": "新年",
     "CNzh": "新年"
   },
@@ -967,7 +985,7 @@
     "USfr": "Shōgatsu",
     "USes": "Shōgatsu",
     "JPja": "正月",
-    "KRko": "새해",
+    "KRko": "새해(쇼가쓰)",
     "TWzh": "新年",
     "CNzh": "新年"
   },
@@ -985,7 +1003,7 @@
     "USfr": "Shōgatsu",
     "USes": "Shōgatsu",
     "JPja": "正月",
-    "KRko": "새해",
+    "KRko": "새해(쇼가쓰)",
     "TWzh": "新年",
     "CNzh": "新年"
   },
