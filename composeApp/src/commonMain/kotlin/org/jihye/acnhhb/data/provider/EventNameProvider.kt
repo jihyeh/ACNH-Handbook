@@ -9,7 +9,7 @@ class EventNameProvider(
     appLocaleManager: AppLocaleManager,
     private val villagerNameProvider: VillagerNameProvider,
     private val specialCharacterNameProvider: SpecialCharacterNameProvider,
-) : SimpleNameProvider(appLocaleManager) {
+) : BaseNameProvider(appLocaleManager) {
 
     override val jsonFileNames: List<String> = listOf(
         EVENT_NAMES,

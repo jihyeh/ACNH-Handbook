@@ -6,7 +6,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jihye.acnhhb.data.model.Translation
 import org.jihye.acnhhb.util.AppLocaleManager
 
-abstract class SimpleNameProvider(
+abstract class BaseNameProvider(
     protected val appLocaleManager: AppLocaleManager,
 ) {
     protected val json = Json { ignoreUnknownKeys = true }
@@ -69,7 +69,7 @@ abstract class SimpleNameProvider(
         }
     }
 
-    companion object {
+    companion object Companion {
         protected const val JSON_PATH = "files/translate/"
         protected const val FURNITURE = "furniture.json"
         protected const val RUGS = "rugs.json"
