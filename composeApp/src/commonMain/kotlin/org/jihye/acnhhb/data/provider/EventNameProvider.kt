@@ -11,64 +11,45 @@ import org.jihye.acnhhb.util.AppLocaleManager
 class EventNameProvider(
     private val appLocaleManager: AppLocaleManager,
     private val villagerNameProvider: VillagerNameProvider,
+    private val specialCharacterNameProvider: SpecialCharacterNameProvider,
 ) {
-    private var nameMap: Map<String, Translation> = emptyMap()
-    private var eventItemsMap: Map<String, Translation> = emptyMap()
-    private var itemMap: Map<String, Translation> = emptyMap()
-    private var specialCharactersMap: Map<String, Translation> = emptyMap()
+    private val allNames = mutableMapOf<String, Translation>()
 
     private val json = Json { ignoreUnknownKeys = true }
 
     @OptIn(ExperimentalResourceApi::class)
     suspend fun load() {
-        if (nameMap.isNotEmpty()) return
+        if (allNames.isNotEmpty()) return
         try {
-            val bytes = Res.readBytes(EVENT_NAMES_JSON_PATH)
-            val jsonString = bytes.decodeToString()
-            val items = json.decodeFromString<List<Translation>>(jsonString)
-            nameMap = items.associateBy { it.enName?.lowercase()?.trim() ?: "" }
-
-            val itemBytes = Res.readBytes(EVENT_ITEMS_JSON_PATH)
-            val itemJsonString = itemBytes.decodeToString()
-            val eventItems = json.decodeFromString<List<Translation>>(itemJsonString)
-            eventItemsMap = eventItems.associateBy { it.enName?.lowercase()?.trim() ?: "" }
-
-            val itemMapBytes = Res.readBytes(ITEM_JSON_PATH)
-            val itemMapJsonString = itemMapBytes.decodeToString()
-            val itemMapItems = json.decodeFromString<List<Translation>>(itemMapJsonString)
-            itemMap = itemMapItems.associateBy { it.enName?.lowercase()?.trim() ?: "" }
-
-            val specialCharactersBytes = Res.readBytes(SPECIAL_CHARACTERS_JSON_PATH)
-            val specialCharactersJsonString = specialCharactersBytes.decodeToString()
-            val specialCharactersItems =
-                json.decodeFromString<List<Translation>>(specialCharactersJsonString)
-            specialCharactersMap =
-                specialCharactersItems.associateBy { it.enName?.lowercase()?.trim() ?: "" }
+            val allItems = mutableListOf<Translation>()
+            val jsonFileNames = listOf(
+                EVENT_NAMES_JSON_PATH,
+                EVENT_ITEMS_JSON_PATH,
+                ITEM_JSON_PATH,
+            )
+            jsonFileNames.forEach { fileName ->
+                val bytes = Res.readBytes(fileName)
+                val jsonString = bytes.decodeToString()
+                val items = json.decodeFromString<List<Translation>>(jsonString)
+                allItems.addAll(items)
+            }
+            allNames.putAll(allItems.associateBy { it.enName?.lowercase()?.trim() ?: "" })
         } catch (e: Exception) {
             e.printStackTrace()
-            // Keep what we loaded
-            if (nameMap.isEmpty()) nameMap = emptyMap()
-            if (eventItemsMap.isEmpty()) eventItemsMap = emptyMap()
-            if (itemMap.isEmpty()) itemMap = emptyMap()
-            if (specialCharactersMap.isEmpty()) specialCharactersMap = emptyMap()
+            allNames.clear()
         }
     }
 
-    suspend fun getName(name: String, type: String? = null): String? {
-        if (nameMap.isEmpty()) {
+    suspend fun getName(name: String): String? {
+        if (allNames.isEmpty()) {
             load()
         }
 
         // 생일 이벤트 처리
-        if (type == EVENT_TYPE_BIRTHDAY || name.contains(KEYWORD_BIRTHDAY)) {
+        if (name.contains(SUFFIX_S_BIRTHDAY, ignoreCase = true)) {
             val villagerName = name.replace(SUFFIX_S_BIRTHDAY, "", ignoreCase = true).trim()
-            val localizedVillager =
-                villagerNameProvider.getNameByEnName(villagerName)
-                    ?: specialCharactersMap[villagerName.lowercase()]?.krName
-                    ?: specialCharactersMap.values.find {
-                        it.enName?.contains(villagerName, ignoreCase = true) == true
-                    }?.krName
-
+            val localizedVillager = villagerNameProvider.getNameByEnName(villagerName)
+                ?: specialCharacterNameProvider.getNameByEnName(villagerName)
             if (localizedVillager != null && appLocaleManager.isKorean()) {
                 return localizedVillager + getString(Res.string.suffix_birthday)
             }
@@ -91,10 +72,7 @@ class EventNameProvider(
                             .replace(suffix, "", ignoreCase = true)
                             .trim()
 
-                    val localizedBaseName =
-                        eventItemsMap[baseName.lowercase()]?.krName
-                            ?: nameMap[baseName.lowercase()]?.krName
-                            ?: itemMap[baseName.lowercase()]?.krName ?: baseName
+                    val localizedBaseName = allNames[baseName.lowercase()]?.krName ?: baseName
 
                     return "$localizedBaseName $KEYWORD_NOOK_SHOPPING_EVENT $localizedSuffix"
                 }
@@ -104,15 +82,11 @@ class EventNameProvider(
             if (name.startsWith(PREFIX_LAST_DAY, ignoreCase = true) &&
                 name.endsWith(SUFFIX_RECIPES_ARE_AVAILABLE, ignoreCase = true)
             ) {
-                val rawName =
-                    name.removePrefix(PREFIX_LAST_DAY)
-                        .replace(SUFFIX_RECIPES_ARE_AVAILABLE, "", ignoreCase = true)
-                        .trim()
+                val rawName = name.removePrefix(PREFIX_LAST_DAY)
+                    .replace(SUFFIX_RECIPES_ARE_AVAILABLE, "", ignoreCase = true)
+                    .trim()
 
-                val localizedName =
-                    eventItemsMap[rawName.lowercase()]?.krName
-                        ?: nameMap[rawName.lowercase()]?.krName
-                        ?: itemMap[rawName.lowercase()]?.krName
+                val localizedName = allNames[rawName.lowercase()]?.krName
                 val prefix = localizedName ?: rawName
                 return "$prefix $SUFFIX_RECIPES_LAST_DAY_KR"
             }
@@ -130,10 +104,7 @@ class EventNameProvider(
             for ((suffix, replacement) in replaceRules) {
                 if (name.contains(suffix, ignoreCase = true)) {
                     val rawName = name.replace(suffix, "", ignoreCase = true).trim()
-                    val localizedName =
-                        eventItemsMap[rawName.lowercase()]?.krName
-                            ?: nameMap[rawName.lowercase()]?.krName
-                            ?: itemMap[rawName.lowercase()]?.krName
+                    val localizedName = allNames[rawName.lowercase()]?.krName
                     val prefix = localizedName ?: rawName
                     return "$prefix $replacement"
                 }
@@ -141,7 +112,7 @@ class EventNameProvider(
         }
 
         // 직접 번역된 이름 찾기 (마지막 수단)
-        val item = nameMap[name.lowercase().trim()] ?: return null
+        val item = allNames[name.lowercase().trim()] ?: return null
         return if (appLocaleManager.isKorean()) {
             item.krName
         } else {
@@ -153,10 +124,7 @@ class EventNameProvider(
         private const val EVENT_NAMES_JSON_PATH = "files/translate/event_names.json"
         private const val EVENT_ITEMS_JSON_PATH = "files/translate/event_items.json"
         private const val ITEM_JSON_PATH = "files/translate/item.json"
-        private const val SPECIAL_CHARACTERS_JSON_PATH = "files/translate/special_characters.json"
 
-        private const val EVENT_TYPE_BIRTHDAY = "Birthday"
-        private const val KEYWORD_BIRTHDAY = "Birthday"
         private const val SUFFIX_S_BIRTHDAY = "'s Birthday"
 
         private const val SUFFIX_BEGINS = "begins"

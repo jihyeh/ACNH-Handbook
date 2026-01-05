@@ -31,7 +31,7 @@ class EventRepositoryImpl(
             emit(
                 remoteEvents.map {
                     val (cleanName, _) = parseHemisphere(it.event)
-                    val localizedName = eventNameProvider.getName(cleanName, it.type)
+                    val localizedName = eventNameProvider.getName(cleanName)
                     it.toDomain(localizedName)
                 }
             )
