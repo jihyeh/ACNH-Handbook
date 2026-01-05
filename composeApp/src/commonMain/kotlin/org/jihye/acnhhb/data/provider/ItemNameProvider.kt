@@ -3,5 +3,5 @@ package org.jihye.acnhhb.data.provider
 import org.jihye.acnhhb.util.AppLocaleManager
 
 class ItemNameProvider(appLocaleManager: AppLocaleManager) : SimpleNameProvider(appLocaleManager) {
-    override val jsonPath: String = "files/translate/item.json"
+    override val jsonPaths: List<String> = listOf(ITEM_JSON_PATH)
 }
