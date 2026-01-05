@@ -39,7 +39,11 @@ abstract class SimpleNameProvider(
             load()
         }
 
-        val item = nameMap[name.lowercase()] ?: return null
+        val item = nameMap.getOrElse(name.lowercase()) {
+            nameMap.values.find {
+                it.enName?.contains(name, ignoreCase = true) == true
+            }
+        } ?: return null
         return if (appLocaleManager.isKorean()) {
             item.krName
         } else {
@@ -53,7 +57,11 @@ abstract class SimpleNameProvider(
             load()
         }
 
-        val item = enNameMap[enName.lowercase()] ?: return null
+        val item = enNameMap.getOrElse(enName.lowercase()) {
+            nameMap.values.find {
+                it.enName?.contains(enName, ignoreCase = true) == true
+            }
+        } ?: return null
         return if (appLocaleManager.isKorean()) {
             item.krName
         } else {
