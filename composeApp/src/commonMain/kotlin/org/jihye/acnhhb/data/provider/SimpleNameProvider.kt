@@ -96,5 +96,6 @@ abstract class SimpleNameProvider(
         protected const val VILLAGER = "villagers.json"
         protected const val BUG_MODELS = "bug_models.json"
         protected const val FISH_MODELS = "fish_models.json"
+        protected const val SPECIAL_CHARACTERS = "special_characters.json"
     }
 }

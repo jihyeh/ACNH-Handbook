@@ -31,6 +31,7 @@ import org.jihye.acnhhb.data.repository.PhotoRepositoryImpl
 import org.jihye.acnhhb.data.provider.RecipeNameProvider
 import org.jihye.acnhhb.data.repository.RecipeRepositoryImpl
 import org.jihye.acnhhb.data.provider.SeaCreatureNameProvider
+import org.jihye.acnhhb.data.provider.SpecialCharacterNameProvider
 import org.jihye.acnhhb.data.repository.SeaCreatureRepositoryImpl
 import org.jihye.acnhhb.data.repository.SettingsRepositoryImpl
 import org.jihye.acnhhb.data.provider.ToolNameProvider
@@ -99,6 +100,7 @@ val dataModule = module {
     singleOf(::RecipeNameProvider)
     singleOf(::PhotoNameProvider)
     singleOf(::EventNameProvider)
+    singleOf(::SpecialCharacterNameProvider)
 }
 
 val repositoryModule = module {
