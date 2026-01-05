@@ -2,129 +2,105 @@ package org.jihye.acnhhb.data.provider
 
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.suffix_birthday
-import kotlinx.serialization.json.Json
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.getString
-import org.jihye.acnhhb.data.model.Translation
 import org.jihye.acnhhb.util.AppLocaleManager
 
 class EventNameProvider(
-    private val appLocaleManager: AppLocaleManager,
+    appLocaleManager: AppLocaleManager,
     private val villagerNameProvider: VillagerNameProvider,
     private val specialCharacterNameProvider: SpecialCharacterNameProvider,
-) {
-    private val allNames = mutableMapOf<String, Translation>()
+) : SimpleNameProvider(appLocaleManager) {
 
-    private val json = Json { ignoreUnknownKeys = true }
+    override val jsonFileNames: List<String> = listOf(
+        EVENT_NAMES,
+        EVENT_ITEMS,
+        ITEM,
+    )
 
-    @OptIn(ExperimentalResourceApi::class)
-    suspend fun load() {
-        if (allNames.isNotEmpty()) return
-        try {
-            val allItems = mutableListOf<Translation>()
-            val jsonFileNames = listOf(
-                EVENT_NAMES_JSON_PATH,
-                EVENT_ITEMS_JSON_PATH,
-                ITEM_JSON_PATH,
-            )
-            jsonFileNames.forEach { fileName ->
-                val bytes = Res.readBytes(fileName)
-                val jsonString = bytes.decodeToString()
-                val items = json.decodeFromString<List<Translation>>(jsonString)
-                allItems.addAll(items)
-            }
-            allNames.putAll(allItems.associateBy { it.enName?.lowercase()?.trim() ?: "" })
-        } catch (e: Exception) {
-            e.printStackTrace()
-            allNames.clear()
-        }
-    }
-
-    suspend fun getName(name: String): String? {
-        if (allNames.isEmpty()) {
+    override suspend fun getName(name: String): String? {
+        if (nameMap.isEmpty()) {
             load()
         }
+        val isKorean = appLocaleManager.isKorean()
 
         // 생일 이벤트 처리
         if (name.contains(SUFFIX_S_BIRTHDAY, ignoreCase = true)) {
             val villagerName = name.replace(SUFFIX_S_BIRTHDAY, "", ignoreCase = true).trim()
             val localizedVillager = villagerNameProvider.getNameByEnName(villagerName)
                 ?: specialCharacterNameProvider.getNameByEnName(villagerName)
-            if (localizedVillager != null && appLocaleManager.isKorean()) {
+            if (localizedVillager != null && isKorean) {
                 return localizedVillager + getString(Res.string.suffix_birthday)
             }
         }
 
-        if (appLocaleManager.isKorean()) {
-            // Nook Shopping 이벤트 처리
-            if (name.contains(KEYWORD_NOOK_SHOPPING_EVENT, ignoreCase = true)) {
-                val suffix =
-                    if (name.endsWith(SUFFIX_BEGINS, ignoreCase = true)) SUFFIX_BEGINS
-                    else if (name.endsWith(SUFFIX_ENDS, ignoreCase = true)) SUFFIX_ENDS
-                    else null
+        if (!isKorean) return super.getName(name)
 
-                if (suffix != null) {
-                    val localizedSuffix =
-                        if (suffix.equals(SUFFIX_BEGINS, true)) SUFFIX_BEGINS_KR
-                        else SUFFIX_ENDS_KR
-                    val baseName =
-                        name.replace(KEYWORD_NOOK_SHOPPING_EVENT, "", ignoreCase = true)
-                            .replace(suffix, "", ignoreCase = true)
-                            .trim()
-
-                    val localizedBaseName = allNames[baseName.lowercase()]?.krName ?: baseName
-
-                    return "$localizedBaseName $KEYWORD_NOOK_SHOPPING_EVENT $localizedSuffix"
-                }
+        // 2. Handle Specific Event Patterns (Nook Shopping / Last Day)
+        val result = when {
+            // Recipe Last Day
+            name.startsWith(PREFIX_LAST_DAY, ignoreCase = true) &&
+                name.endsWith(SUFFIX_RECIPES_ARE_AVAILABLE, ignoreCase = true) -> {
+                val raw = name.removePrefix(PREFIX_LAST_DAY)
+                    .removeSuffixIgnoringCase(SUFFIX_RECIPES_ARE_AVAILABLE).trim()
+                val localized = nameMap[raw.lowercase()]?.krName ?: raw
+                "$localized $SUFFIX_RECIPES_LAST_DAY_KR"
             }
 
-            // 레시피 획득 마지막 날 처리
-            if (name.startsWith(PREFIX_LAST_DAY, ignoreCase = true) &&
-                name.endsWith(SUFFIX_RECIPES_ARE_AVAILABLE, ignoreCase = true)
-            ) {
-                val rawName = name.removePrefix(PREFIX_LAST_DAY)
-                    .replace(SUFFIX_RECIPES_ARE_AVAILABLE, "", ignoreCase = true)
-                    .trim()
-
-                val localizedName = allNames[rawName.lowercase()]?.krName
-                val prefix = localizedName ?: rawName
-                return "$prefix $SUFFIX_RECIPES_LAST_DAY_KR"
+            // Nook Shopping
+            name.contains(KEYWORD_NOOK_SHOPPING_EVENT, ignoreCase = true) -> {
+                parseNookShopping(name)
             }
 
-            // 일반적인 접미사 (시작, 종료, 레시피 획득 등) 처리
-            val replaceRules =
-                listOf(
-                    SUFFIX_RECIPES_AVAILABLE to SUFFIX_RECIPES_START_KR,
-                    SUFFIX_RECIPES_ARE_AVAILABLE to SUFFIX_RECIPES_AVAILABLE_KR,
-                    SUFFIX_BEGINS to SUFFIX_BEGINS_KR,
-                    SUFFIX_BEGIN to SUFFIX_BEGINS_KR,
-                    SUFFIX_ENDS to SUFFIX_ENDS_KR,
-                    SUFFIX_END to SUFFIX_ENDS_KR,
-                )
-            for ((suffix, replacement) in replaceRules) {
-                if (name.contains(suffix, ignoreCase = true)) {
-                    val rawName = name.replace(suffix, "", ignoreCase = true).trim()
-                    val localizedName = allNames[rawName.lowercase()]?.krName
-                    val prefix = localizedName ?: rawName
-                    return "$prefix $replacement"
-                }
-            }
+            // 3. General Suffixes (Dynamic replacement)
+            else -> parseGeneralSuffix(name)
         }
 
-        // 직접 번역된 이름 찾기 (마지막 수단)
-        val item = allNames[name.lowercase().trim()] ?: return null
-        return if (appLocaleManager.isKorean()) {
-            item.krName
-        } else {
-            item.enName
+        return result ?: super.getName(name)
+    }
+
+    private fun parseNookShopping(name: String): String? {
+        val suffix = when {
+            name.endsWith(SUFFIX_BEGINS, true) -> SUFFIX_BEGINS
+            name.endsWith(SUFFIX_ENDS, true) -> SUFFIX_ENDS
+            else -> return null
         }
+
+        val localizedSuffix = if (suffix == SUFFIX_BEGINS) SUFFIX_BEGINS_KR else SUFFIX_ENDS_KR
+        val baseName = name
+            .replace(KEYWORD_NOOK_SHOPPING_EVENT, "", ignoreCase = true)
+            .replace(suffix, "", ignoreCase = true).trim()
+
+        val localizedBase = nameMap[baseName.lowercase()]?.krName ?: baseName
+        return "$localizedBase $KEYWORD_NOOK_SHOPPING_EVENT $localizedSuffix"
+    }
+
+    private fun parseGeneralSuffix(name: String): String? {
+        // Order from longest to shortest to prevent partial matches
+        val rules = listOf(
+            SUFFIX_RECIPES_ARE_AVAILABLE to SUFFIX_RECIPES_AVAILABLE_KR,
+            SUFFIX_RECIPES_AVAILABLE to SUFFIX_RECIPES_START_KR,
+            SUFFIX_BEGINS to SUFFIX_BEGINS_KR,
+            SUFFIX_BEGIN to SUFFIX_BEGINS_KR,
+            SUFFIX_ENDS to SUFFIX_ENDS_KR,
+            SUFFIX_END to SUFFIX_ENDS_KR
+        )
+
+        for ((enSuffix, krSuffix) in rules) {
+            if (name.endsWith(enSuffix, ignoreCase = true)) {
+                val rawName = name.removeSuffixIgnoringCase(enSuffix).trim()
+                val localizedName = nameMap[rawName.lowercase()]?.krName ?: rawName
+                return "$localizedName $krSuffix"
+            }
+        }
+        return null
+    }
+
+    // Helper for cleaner code
+    fun String.removeSuffixIgnoringCase(suffix: String): String {
+        return if (endsWith(suffix, ignoreCase = true)) substring(0, length - suffix.length) else this
     }
 
     companion object {
-        private const val EVENT_NAMES_JSON_PATH = "files/translate/event_names.json"
-        private const val EVENT_ITEMS_JSON_PATH = "files/translate/event_items.json"
-        private const val ITEM_JSON_PATH = "files/translate/item.json"
-
         private const val SUFFIX_S_BIRTHDAY = "'s Birthday"
 
         private const val SUFFIX_BEGINS = "begins"

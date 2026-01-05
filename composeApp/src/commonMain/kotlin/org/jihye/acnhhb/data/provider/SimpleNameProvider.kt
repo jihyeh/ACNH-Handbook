@@ -92,6 +92,7 @@ abstract class SimpleNameProvider(
         protected const val FENCING = "fencing.json"
         protected const val DOOR_DECO = "door deco.json"
         protected const val EVENT_ITEMS = "event_items.json"
+        protected const val EVENT_NAMES = "event_names.json"
         protected const val ART = "art.json"
         protected const val BUG = "bugs.json"
         protected const val FISH = "fish.json"
