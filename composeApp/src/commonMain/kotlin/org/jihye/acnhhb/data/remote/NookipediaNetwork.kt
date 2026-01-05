@@ -84,8 +84,8 @@ class NookipediaNetwork {
     }
 
     companion object {
-        private const val TIMEOUT_MILLIS = 6_000L
+        private const val TIMEOUT_MILLIS = 10_000L
         private const val API_VERSION = "1.3.0"
-        const val BASE_HOST = "api.nookipedia.com"
+        private const val BASE_HOST = "api.nookipedia.com"
     }
 }
