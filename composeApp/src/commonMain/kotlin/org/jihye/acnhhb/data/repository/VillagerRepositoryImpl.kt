@@ -5,6 +5,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.jihye.acnhhb.data.mapper.toDomain
+import org.jihye.acnhhb.data.provider.VillagerNameProvider
 import org.jihye.acnhhb.data.remote.RemoteDataSource
 import org.jihye.acnhhb.domain.model.Villager
 import org.jihye.acnhhb.domain.repository.VillagerRepository
@@ -29,7 +30,7 @@ class VillagerRepositoryImpl(
 
             emit(
                 remoteVillagers.map {
-                    val localizedName = villagerNameProvider.getName(it.id)
+                    val localizedName = villagerNameProvider.getName(it.name)
                     it.toDomain(localizedName)
                 }
             )

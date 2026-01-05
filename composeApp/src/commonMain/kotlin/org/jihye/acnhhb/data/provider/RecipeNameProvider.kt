@@ -1,14 +1,13 @@
-package org.jihye.acnhhb.data.repository
+package org.jihye.acnhhb.data.provider
 
 import acnhhandbook.composeapp.generated.resources.Res
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jihye.acnhhb.data.model.Translation
 import org.jihye.acnhhb.util.AppLocaleManager
 
 class RecipeNameProvider(private val appLocaleManager: AppLocaleManager) {
-    private var nameMap: Map<String, RecipeTranslation> = emptyMap()
+    private var nameMap: Map<String, Translation> = emptyMap()
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -16,7 +15,7 @@ class RecipeNameProvider(private val appLocaleManager: AppLocaleManager) {
     suspend fun load() {
         if (nameMap.isNotEmpty()) return
         try {
-            val allItems = mutableListOf<RecipeTranslation>()
+            val allItems = mutableListOf<Translation>()
             val filePaths =
                 listOf(
                     FURNITURE_JSON_PATH,
@@ -46,7 +45,7 @@ class RecipeNameProvider(private val appLocaleManager: AppLocaleManager) {
                 try {
                     val bytes = Res.readBytes(path)
                     val jsonString = bytes.decodeToString()
-                    val items = json.decodeFromString<List<RecipeTranslation>>(jsonString)
+                    val items = json.decodeFromString<List<Translation>>(jsonString)
                     allItems.addAll(items)
                 } catch (e: Exception) {
                     println("Failed to load recipe translation from $path: ${e.message}")
@@ -73,13 +72,6 @@ class RecipeNameProvider(private val appLocaleManager: AppLocaleManager) {
         }
     }
 
-    @Serializable
-    private data class RecipeTranslation(
-        @SerialName(LOCALE_KEY_ID) val id: String,
-        @SerialName(LOCALE_KEY_KOREAN) val krName: String? = null,
-        @SerialName(LOCALE_KEY_ENGLISH) val enName: String? = null,
-    )
-
     companion object {
         private const val FURNITURE_JSON_PATH = "files/translate/furniture.json"
         private const val RUGS_JSON_PATH = "files/translate/rugs.json"
@@ -102,9 +94,5 @@ class RecipeNameProvider(private val appLocaleManager: AppLocaleManager) {
         private const val FENCING_JSON_PATH = "files/translate/fencing.json"
         private const val DOOR_DECO_JSON_PATH = "files/translate/door deco.json"
         private const val EVENT_ITEMS_JSON_PATH = "files/translate/event_items.json"
-
-        private const val LOCALE_KEY_ID = "Id"
-        private const val LOCALE_KEY_KOREAN = "KRko"
-        private const val LOCALE_KEY_ENGLISH = "USen"
     }
 }

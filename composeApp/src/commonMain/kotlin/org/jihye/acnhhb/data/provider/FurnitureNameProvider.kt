@@ -1,14 +1,13 @@
-package org.jihye.acnhhb.data.repository
+package org.jihye.acnhhb.data.provider
 
 import acnhhandbook.composeapp.generated.resources.Res
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jihye.acnhhb.data.model.Translation
 import org.jihye.acnhhb.util.AppLocaleManager
 
 class FurnitureNameProvider(private val appLocaleManager: AppLocaleManager) {
-    private var nameMap: Map<String, FurnitureTranslation> = emptyMap()
+    private var nameMap: Map<String, Translation> = emptyMap()
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -16,7 +15,7 @@ class FurnitureNameProvider(private val appLocaleManager: AppLocaleManager) {
     suspend fun load() {
         if (nameMap.isNotEmpty()) return
         try {
-            val allItems = mutableListOf<FurnitureTranslation>()
+            val allItems = mutableListOf<Translation>()
             val filePaths =
                 listOf(
                     FURNITURE_JSON_PATH,
@@ -31,7 +30,7 @@ class FurnitureNameProvider(private val appLocaleManager: AppLocaleManager) {
                 try {
                     val bytes = Res.readBytes(path)
                     val jsonString = bytes.decodeToString()
-                    val items = json.decodeFromString<List<FurnitureTranslation>>(jsonString)
+                    val items = json.decodeFromString<List<Translation>>(jsonString)
                     allItems.addAll(items)
                 } catch (e: Exception) {
                     println("Failed to load furniture translation from $path: ${e.message}")
@@ -77,13 +76,6 @@ class FurnitureNameProvider(private val appLocaleManager: AppLocaleManager) {
         }
     }
 
-    @Serializable
-    private data class FurnitureTranslation(
-        @SerialName(LOCALE_KEY_ID) val id: String,
-        @SerialName(LOCALE_KEY_KOREAN) val krName: String? = null,
-        @SerialName(LOCALE_KEY_ENGLISH) val enName: String? = null,
-    )
-
     companion object {
         private const val FURNITURE_JSON_PATH = "files/translate/furniture.json"
         private const val DISHES_JSON_PATH = "files/translate/dishes.json"
@@ -92,9 +84,6 @@ class FurnitureNameProvider(private val appLocaleManager: AppLocaleManager) {
         private const val DOOR_DECO_JSON_PATH = "files/translate/door deco.json"
         private const val ART_JSON_PATH = "files/translate/art.json"
 
-        private const val LOCALE_KEY_ID = "Id"
-        private const val LOCALE_KEY_KOREAN = "KRko"
-        private const val LOCALE_KEY_ENGLISH = "USen"
         private const val FAKE_SUFFIX_EN = "(fake)"
         private const val FAKE_SUFFIX_KR = "(가품)"
     }

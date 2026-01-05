@@ -1,15 +1,14 @@
-package org.jihye.acnhhb.data.repository
+package org.jihye.acnhhb.data.provider
 
 import acnhhandbook.composeapp.generated.resources.Res
 import io.github.aakira.napier.Napier
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jihye.acnhhb.data.model.Translation
 import org.jihye.acnhhb.util.AppLocaleManager
 
 class PhotoNameProvider(private val appLocaleManager: AppLocaleManager) {
-    private var nameMap: Map<String, PhotoTranslation> = emptyMap()
+    private var nameMap: Map<String, Translation> = emptyMap()
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -17,7 +16,7 @@ class PhotoNameProvider(private val appLocaleManager: AppLocaleManager) {
     suspend fun load() {
         if (nameMap.isNotEmpty()) return
         try {
-            val allItems = mutableListOf<PhotoTranslation>()
+            val allItems = mutableListOf<Translation>()
             val filePaths = listOf(
                 PHOTOS_JSON_PATH,
                 POSTERS_JSON_PATH,
@@ -27,7 +26,7 @@ class PhotoNameProvider(private val appLocaleManager: AppLocaleManager) {
                 try {
                     val bytes = Res.readBytes(path)
                     val jsonString = bytes.decodeToString()
-                    val items = json.decodeFromString<List<PhotoTranslation>>(jsonString)
+                    val items = json.decodeFromString<List<Translation>>(jsonString)
                     allItems.addAll(items)
                 } catch (e: Exception) {
                     println("Failed to load photo translation from $path: ${e.message}")
@@ -56,19 +55,8 @@ class PhotoNameProvider(private val appLocaleManager: AppLocaleManager) {
         }
     }
 
-    @Serializable
-    private data class PhotoTranslation(
-            @SerialName(LOCALE_KEY_ID) val id: String,
-            @SerialName(LOCALE_KEY_KOREAN) val krName: String? = null,
-            @SerialName(LOCALE_KEY_ENGLISH) val enName: String? = null,
-    )
-
     companion object {
         private const val PHOTOS_JSON_PATH = "files/translate/photos.json"
         private const val POSTERS_JSON_PATH = "files/translate/posters.json"
-
-        private const val LOCALE_KEY_ID = "Id"
-        private const val LOCALE_KEY_KOREAN = "KRko"
-        private const val LOCALE_KEY_ENGLISH = "USen"
     }
 }

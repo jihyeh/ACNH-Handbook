@@ -1,14 +1,13 @@
-package org.jihye.acnhhb.data.repository
+package org.jihye.acnhhb.data.provider
 
 import acnhhandbook.composeapp.generated.resources.Res
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jihye.acnhhb.data.model.Translation
 import org.jihye.acnhhb.util.AppLocaleManager
 
 class ClothingNameProvider(private val appLocaleManager: AppLocaleManager) {
-    private var nameMap: Map<String, ClothingTranslation> = emptyMap()
+    private var nameMap: Map<String, Translation> = emptyMap()
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -16,7 +15,7 @@ class ClothingNameProvider(private val appLocaleManager: AppLocaleManager) {
     suspend fun load() {
         if (nameMap.isNotEmpty()) return
         try {
-            val allItems = mutableListOf<ClothingTranslation>()
+            val allItems = mutableListOf<Translation>()
 
             val filePaths = listOf(
                 TOPS_JSON_PATH,
@@ -36,7 +35,7 @@ class ClothingNameProvider(private val appLocaleManager: AppLocaleManager) {
                 try {
                     val bytes = Res.readBytes(path)
                     val jsonString = bytes.decodeToString()
-                    val items = json.decodeFromString<List<ClothingTranslation>>(jsonString)
+                    val items = json.decodeFromString<List<Translation>>(jsonString)
                     allItems.addAll(items)
                 } catch (e: Exception) {
                     println("Failed to load clothing translation from $path: ${e.message}")
@@ -63,13 +62,6 @@ class ClothingNameProvider(private val appLocaleManager: AppLocaleManager) {
         }
     }
 
-    @Serializable
-    private data class ClothingTranslation(
-        @SerialName(LOCALE_KEY_ID) val id: String,
-        @SerialName(LOCALE_KEY_KOREAN) val krName: String? = null,
-        @SerialName(LOCALE_KEY_ENGLISH) val enName: String? = null,
-    )
-
     companion object {
         private const val TOPS_JSON_PATH = "files/translate/tops.json"
         private const val BOTTOMS_JSON_PATH = "files/translate/bottoms.json"
@@ -82,8 +74,5 @@ class ClothingNameProvider(private val appLocaleManager: AppLocaleManager) {
         private const val SOCKS_JSON_PATH = "files/translate/socks.json"
         private const val HANDBAGS_JSON_PATH = "files/translate/handbags.json"
         private const val HELMETS_JSON_PATH = "files/translate/helmets.json"
-        private const val LOCALE_KEY_ID = "Id"
-        private const val LOCALE_KEY_KOREAN = "KRko"
-        private const val LOCALE_KEY_ENGLISH = "USen"
     }
 }

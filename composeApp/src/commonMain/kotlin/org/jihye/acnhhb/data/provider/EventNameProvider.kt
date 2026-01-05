@@ -1,22 +1,21 @@
-package org.jihye.acnhhb.data.repository
+package org.jihye.acnhhb.data.provider
 
 import acnhhandbook.composeapp.generated.resources.Res
 import acnhhandbook.composeapp.generated.resources.suffix_birthday
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.getString
+import org.jihye.acnhhb.data.model.Translation
 import org.jihye.acnhhb.util.AppLocaleManager
 
 class EventNameProvider(
     private val appLocaleManager: AppLocaleManager,
     private val villagerNameProvider: VillagerNameProvider,
 ) {
-    private var nameMap: Map<String, EventTranslation> = emptyMap()
-    private var eventItemsMap: Map<String, EventTranslation> = emptyMap()
-    private var itemMap: Map<String, EventTranslation> = emptyMap()
-    private var specialCharactersMap: Map<String, EventTranslation> = emptyMap()
+    private var nameMap: Map<String, Translation> = emptyMap()
+    private var eventItemsMap: Map<String, Translation> = emptyMap()
+    private var itemMap: Map<String, Translation> = emptyMap()
+    private var specialCharactersMap: Map<String, Translation> = emptyMap()
 
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -26,23 +25,23 @@ class EventNameProvider(
         try {
             val bytes = Res.readBytes(EVENT_NAMES_JSON_PATH)
             val jsonString = bytes.decodeToString()
-            val items = json.decodeFromString<List<EventTranslation>>(jsonString)
+            val items = json.decodeFromString<List<Translation>>(jsonString)
             nameMap = items.associateBy { it.enName?.lowercase()?.trim() ?: "" }
 
             val itemBytes = Res.readBytes(EVENT_ITEMS_JSON_PATH)
             val itemJsonString = itemBytes.decodeToString()
-            val eventItems = json.decodeFromString<List<EventTranslation>>(itemJsonString)
+            val eventItems = json.decodeFromString<List<Translation>>(itemJsonString)
             eventItemsMap = eventItems.associateBy { it.enName?.lowercase()?.trim() ?: "" }
 
             val itemMapBytes = Res.readBytes(ITEM_JSON_PATH)
             val itemMapJsonString = itemMapBytes.decodeToString()
-            val itemMapItems = json.decodeFromString<List<EventTranslation>>(itemMapJsonString)
+            val itemMapItems = json.decodeFromString<List<Translation>>(itemMapJsonString)
             itemMap = itemMapItems.associateBy { it.enName?.lowercase()?.trim() ?: "" }
 
             val specialCharactersBytes = Res.readBytes(SPECIAL_CHARACTERS_JSON_PATH)
             val specialCharactersJsonString = specialCharactersBytes.decodeToString()
             val specialCharactersItems =
-                json.decodeFromString<List<EventTranslation>>(specialCharactersJsonString)
+                json.decodeFromString<List<Translation>>(specialCharactersJsonString)
             specialCharactersMap =
                 specialCharactersItems.associateBy { it.enName?.lowercase()?.trim() ?: "" }
         } catch (e: Exception) {
@@ -150,22 +149,11 @@ class EventNameProvider(
         }
     }
 
-    @Serializable
-    private data class EventTranslation(
-        @SerialName(LOCALE_KEY_ID) val id: String,
-        @SerialName(LOCALE_KEY_KOREAN) val krName: String? = null,
-        @SerialName(LOCALE_KEY_ENGLISH) val enName: String? = null,
-    )
-
     companion object {
         private const val EVENT_NAMES_JSON_PATH = "files/translate/event_names.json"
         private const val EVENT_ITEMS_JSON_PATH = "files/translate/event_items.json"
         private const val ITEM_JSON_PATH = "files/translate/item.json"
         private const val SPECIAL_CHARACTERS_JSON_PATH = "files/translate/special_characters.json"
-
-        private const val LOCALE_KEY_ID = "Id"
-        private const val LOCALE_KEY_KOREAN = "KRko"
-        private const val LOCALE_KEY_ENGLISH = "USen"
 
         private const val EVENT_TYPE_BIRTHDAY = "Birthday"
         private const val KEYWORD_BIRTHDAY = "Birthday"
